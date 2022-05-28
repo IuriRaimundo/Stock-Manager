@@ -1,14 +1,22 @@
 package com.stockmanager.model.storage;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class StorageManager {
 
+    // Lotes armazenados
     private final LinkedList<Lot> storedLots;
+    // Histórico de lotes
     private final LinkedList<Lot> lotHistory;
-
+    // Registos de entrada de lote
     private final LinkedList<LotEntryRecord> lotEntryRecords;
+    // Registos de saída de produtos de um lote
     private final LinkedList<ProductIssueRecord> productIssueRecords;
+    // Registos de quebra de produtos de um lote
     private final LinkedList<ProductBreakageRecord> productBreakageRecords;
 
     private static final StorageManager instance = new StorageManager();
@@ -25,36 +33,60 @@ public class StorageManager {
         this.productBreakageRecords = new LinkedList<>();
     }
 
+    /**
+     * @return Cópia da lista de lotes armazenados
+     */
     public LinkedList<Lot> getStoredLots() {
         return new LinkedList<>(storedLots);
     }
 
+    /**
+     * @return Cópia da lista de histórico de lotes
+     */
     public LinkedList<Lot> getLotHistory() {
         return new LinkedList<>(lotHistory);
     }
 
+    /**
+     * @return Cópia da lista de registos de entrada de lot
+     */
     public LinkedList<LotEntryRecord> getLotEntryRecords() {
         return new LinkedList<>(lotEntryRecords);
     }
 
+    /**
+     * @return Cópia da lista de registos de saída de produtos de um lote
+     */
     public LinkedList<ProductIssueRecord> getProductIssueRecords() {
         return new LinkedList<>(productIssueRecords);
     }
 
+    /**
+     * @return Cópia da lista de registos de quebra de produtos de um lote
+     */
     public LinkedList<ProductBreakageRecord> getProductBreakageRecords() {
         return new LinkedList<>(productBreakageRecords);
     }
 
-    public void registerLotEntry(LotEntryRecord lotEntryRecord) {
+    /**
+     * Método para registar a entrada de um lote
+     * @param lotEntryRecord Registo de entrada de um lote
+     */
+    public void registerLotEntry(@NotNull LotEntryRecord lotEntryRecord) {
+        // Validar data de expiração
         this.lotEntryRecords.add(lotEntryRecord);
         addLot(lotEntryRecord.getLot());
     }
 
-    public void registerProductIssue(ProductIssueRecord productIssueRecord) {
+    /**
+     * Método para registar a saída de produtos de um lote
+     * @param productIssueRecord Registo de saída de produtos de um lote
+     */
+    public void registerProductIssue(@NotNull ProductIssueRecord productIssueRecord) {
         this.productIssueRecords.add(productIssueRecord);
         Lot lot = productIssueRecord.getLot();
         int movedAmount = productIssueRecord.getMovedAmount();
-        lot.setQuantity(lot.getQuantity() - movedAmount);
+        lot.subtractQuantity(movedAmount);
 
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
@@ -62,11 +94,15 @@ public class StorageManager {
         }
     }
 
-    public void registerProductBreakage(ProductBreakageRecord productBreakageRecord) {
+    /**
+     * Método para registar a quebra de produtos de um lote
+     * @param productBreakageRecord Registo de quebra de produtos de um lote
+     */
+    public void registerProductBreakage(@NotNull ProductBreakageRecord productBreakageRecord) {
         this.productBreakageRecords.add(productBreakageRecord);
         Lot lot = productBreakageRecord.getLot();
         int movedAmount = productBreakageRecord.getMovedAmount();
-        lot.setQuantity(lot.getQuantity() - movedAmount);
+        lot.subtractQuantity(movedAmount);
 
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
@@ -74,7 +110,11 @@ public class StorageManager {
         }
     }
 
-    private void addLot(Lot lot) {
+    /**
+     * Método para adicionar um lote
+     * @param lot Lot a adicionar
+     */
+    private void addLot(@NotNull Lot lot) {
         storedLots.add(lot);
     }
 

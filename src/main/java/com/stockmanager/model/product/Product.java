@@ -1,10 +1,10 @@
 package com.stockmanager.model.product;
 
-import com.stockmanager.model.product.exceptions.InvalidProductNameException;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.product.exceptions.*;
+
 
 public class Product {
 
@@ -13,9 +13,9 @@ public class Product {
     private final String id;
     private final Category category;
     private final ProductPricingUnit productPricingUnit;
+    private final String brand;
     private double price;
     private String name;
-    private String brand;
     private boolean isActive;
 
     /**
