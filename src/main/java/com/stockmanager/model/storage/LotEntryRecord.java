@@ -1,9 +1,11 @@
 package com.stockmanager.model.storage;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LotEntryRecord extends MovementRecord {
 
-    public LotEntryRecord(String id, Date movementDate, Lot lot) {
-        super(id, movementDate, lot, lot.getQuantity());
+    public LotEntryRecord(@NotNull Lot lot) {
+        super(lot, lot.getQuantity());
     }
 
 }

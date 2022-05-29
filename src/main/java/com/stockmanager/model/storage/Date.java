@@ -19,6 +19,10 @@ public class Date {
 
     Calendar calendar;
 
+    public Date() {
+        calendar = Calendar.getInstance();
+    }
+
     public Date(int day, int month, int year) {
         calendar = new GregorianCalendar(year, month-1, day);
     }

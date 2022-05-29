@@ -1,9 +1,8 @@
 package com.stockmanager.model.storage;
 
+import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class StorageManager {
@@ -71,23 +70,41 @@ public class StorageManager {
     /**
      * Método para registar a entrada de um lote
      * @param lotEntryRecord Registo de entrada de um lote
+     * @throws InvalidLotExpirationDateException Se a data de expiração de lote for inferior à data atual
      */
-    public void registerLotEntry(@NotNull LotEntryRecord lotEntryRecord) {
-        // Validar data de expiração
+    public void registerLotEntry(@NotNull LotEntryRecord lotEntryRecord) throws InvalidLotExpirationDateException {
+        // Validar entrada de lote
+        StorageManagerUtils.validateLotEntry(lotEntryRecord);
+
+        //  Adicionar lote aos lotes ativos e registar movimento de entrada
+        this.storedLots.add(lotEntryRecord.getLot());
         this.lotEntryRecords.add(lotEntryRecord);
-        addLot(lotEntryRecord.getLot());
     }
 
     /**
      * Método para registar a saída de produtos de um lote
      * @param productIssueRecord Registo de saída de produtos de um lote
+     * @throws InvalidLotQuantityException Se a quantidade do produto após subtração da quantidade movida for negativa
+     * @throws LotNotFoundException Se o lote do movimento não se encontra na lista de lotes ativos.
      */
-    public void registerProductIssue(@NotNull ProductIssueRecord productIssueRecord) {
-        this.productIssueRecords.add(productIssueRecord);
+    public void registerProductIssue(@NotNull ProductIssueRecord productIssueRecord)
+            throws InvalidLotQuantityException, LotNotFoundException
+    {
+
+        // Verificar se o lote está registado nos lotes ativos
+        if (!storedLots.contains(productIssueRecord.getLot())) {
+            throw new LotNotFoundException(productIssueRecord.getLot());
+        }
+
+        // Subtrair quantidade movida do lote
         Lot lot = productIssueRecord.getLot();
         int movedAmount = productIssueRecord.getMovedAmount();
         lot.subtractQuantity(movedAmount);
 
+        // Registar movimento de saída de produtos
+        this.productIssueRecords.add(productIssueRecord);
+
+        // Se a quantidade do lote for 0, tirar lote dos lotes ativos e adicionar ao histórico
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
             lotHistory.add(lot);
@@ -97,25 +114,30 @@ public class StorageManager {
     /**
      * Método para registar a quebra de produtos de um lote
      * @param productBreakageRecord Registo de quebra de produtos de um lote
+     * @throws InvalidLotQuantityException Se a quantidade do produto após subtração da quantidade movida for negativa
+     * @throws LotNotFoundException Se o lote do movimento não se encontra na lista de lotes ativos.
      */
-    public void registerProductBreakage(@NotNull ProductBreakageRecord productBreakageRecord) {
-        this.productBreakageRecords.add(productBreakageRecord);
+    public void registerProductBreakage(@NotNull ProductBreakageRecord productBreakageRecord)
+            throws InvalidLotQuantityException, LotNotFoundException
+    {
+
+        // Verificar se o lote está registado nos lotes ativos
+        if (!storedLots.contains(productBreakageRecord.getLot())) {
+            throw new LotNotFoundException(productBreakageRecord.getLot());
+        }
+
+        // Subtrair quantidade movida do lote
         Lot lot = productBreakageRecord.getLot();
         int movedAmount = productBreakageRecord.getMovedAmount();
         lot.subtractQuantity(movedAmount);
 
+        // Registar movimento de quebra de produtos
+        this.productBreakageRecords.add(productBreakageRecord);
+
+        // Se a quantidade do lote for 0, tirar lote dos lotes ativos e adicionar ao histórico
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
             lotHistory.add(lot);
         }
     }
-
-    /**
-     * Método para adicionar um lote
-     * @param lot Lot a adicionar
-     */
-    private void addLot(@NotNull Lot lot) {
-        storedLots.add(lot);
-    }
-
 }
