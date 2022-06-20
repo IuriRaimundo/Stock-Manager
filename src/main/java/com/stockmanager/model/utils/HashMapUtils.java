@@ -19,9 +19,9 @@ public class HashMapUtils {
      * @throws DuplicateKeyException Se a chave não for única
      * @throws DuplicateValueException Se o valor não for único
      */
-    public static <K, V> void hashMapUniqueKeyInsertion(@NotNull HashMap<K, V> map,
-                                                        @NotNull K key,
-                                                        @NotNull V value) {
+    public static <K, V> void hashMapUniqueInsertion(@NotNull HashMap<K, V> map,
+                                                     @NotNull K key,
+                                                     @NotNull V value) {
         if (map.containsKey(key)) {
             throw new DuplicateKeyException();
         }

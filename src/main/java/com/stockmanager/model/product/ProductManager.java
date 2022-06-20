@@ -43,7 +43,7 @@ public class ProductManager {
      */
     public void addCategory(@NotNull Category category) throws DuplicateKeyException {
         // Registar categoria
-        HashMapUtils.hashMapUniqueKeyInsertion(
+        HashMapUtils.hashMapUniqueInsertion(
                 categories,
                 category.getId(),
                 category);
@@ -94,7 +94,7 @@ public class ProductManager {
         }
 
         // Registar produto
-        HashMapUtils.hashMapUniqueKeyInsertion(
+        HashMapUtils.hashMapUniqueInsertion(
                 products,
                 product.getId(),
                 product);
