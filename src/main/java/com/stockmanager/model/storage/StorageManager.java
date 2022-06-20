@@ -71,10 +71,11 @@ public class StorageManager {
      * Método para registar a entrada de um lote
      * @param lotEntryRecord Registo de entrada de um lote
      * @throws InvalidLotExpirationDateException Se a data de expiração de lote for inferior à data atual
+     * @throws DuplicateLotEntryException Se o lote já estiver guardado nos storedLots
      */
     public void registerLotEntry(@NotNull LotEntryRecord lotEntryRecord) throws InvalidLotExpirationDateException {
         // Validar entrada de lote
-        StorageManagerUtils.validateLotEntry(lotEntryRecord);
+        StorageManagerUtils.validateLotEntry(lotEntryRecord, storedLots);
 
         //  Adicionar lote aos lotes ativos e registar movimento de entrada
         this.storedLots.add(lotEntryRecord.getLot());

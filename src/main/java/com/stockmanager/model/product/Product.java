@@ -26,7 +26,7 @@ public class Product {
      * @param productPricingUnit Undidade de formação de preço do produto
      * @param isActive Estado do produto, verdadeiro = ativo, falso = desativo
      */
-    Product(@NotNull String name,
+    public Product(@NotNull String name,
             @NotNull String brand,
             @NotNull Category category,
             double price,

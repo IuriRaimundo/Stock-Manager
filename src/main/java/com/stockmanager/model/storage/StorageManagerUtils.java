@@ -1,21 +1,32 @@
 package com.stockmanager.model.storage;
 
 import com.stockmanager.model.storage.exceptions.InvalidLotExpirationDateException;
+import com.stockmanager.model.storage.exceptions.DuplicateLotEntryException;
 
 import java.util.Calendar;
+import java.util.LinkedList;
 
 abstract public class StorageManagerUtils {
 
     /**
      * Método para validar a entrada de um lote
-     * @param lotEntryRecord
+     * @param lotEntryRecord Registo de entrada do lote
+     * @param storedLots Lots armazenados para validar
+     * @throws InvalidLotExpirationDateException Se a data de expiração do lote for inferior à data atual
+     * @throws DuplicateLotEntryException Se o lote já estiver guardado nos storedLots
      */
-    static void validateLotEntry(LotEntryRecord lotEntryRecord) {
+    static void validateLotEntry(LotEntryRecord lotEntryRecord, LinkedList<Lot> storedLots) {
         // Validar data de expiração
         Date expirationDate =  lotEntryRecord.getLot().getExpirationDate();
         // Se data de expiração for inferior à data atual, lançar exceção
         if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
             throw new InvalidLotExpirationDateException(expirationDate);
         }
+
+        // Validar unicidade do lote
+        if (storedLots.contains(lotEntryRecord.getLot())) {
+            throw new DuplicateLotEntryException(lotEntryRecord.getLot());
+        }
+
     }
 }
