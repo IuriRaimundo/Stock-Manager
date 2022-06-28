@@ -29,7 +29,7 @@ public class HomeScreenController implements Initializable {
  private double calculateTotalProductIssueGain () {
      double gainValue = 0;
 
-     for (ProductIssueRecord r : StorageManager.getStockManager().getProductIssueRecords()) {
+     for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
          gainValue += r.getGainValue();
      }
      return gainValue;
@@ -37,7 +37,7 @@ public class HomeScreenController implements Initializable {
     private double calculateTotalBreakageProduct() {
         double gainValue = 0;
 
-        for (ProductIssueRecord r : StorageManager.getStockManager().getProductIssueRecords()) {
+        for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
             gainValue += r.getGainValue();
         }
 
