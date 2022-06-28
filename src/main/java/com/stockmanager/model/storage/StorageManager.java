@@ -28,7 +28,7 @@ public class StorageManager extends Manager implements Serializable {
 
     private static StorageManager instance = new StorageManager();
 
-    public static StorageManager getStockManager () {
+    public static StorageManager getStorageManager() {
         return instance;
     }
 

@@ -28,7 +28,7 @@ public class StockManager extends Application {
     @Override
     public void init() {
         System.out.println("Starting the application...");
-        DataManager<StorageManager> storageManagerDL = new DataManager<>(StorageManager.getStockManager());
+        DataManager<StorageManager> storageManagerDL = new DataManager<>(StorageManager.getStorageManager());
         DataManager<ProductManager> productManagerDL = new DataManager<>(ProductManager.getProductManager());
 
         try {
@@ -42,7 +42,7 @@ public class StockManager extends Application {
     @Override
     public void stop() {
         System.out.println("Closing the application...");
-        DataManager<StorageManager> storageManagerDataManager = new DataManager<>(StorageManager.getStockManager());
+        DataManager<StorageManager> storageManagerDataManager = new DataManager<>(StorageManager.getStorageManager());
         DataManager<ProductManager> productManagerDL = new DataManager<>(ProductManager.getProductManager());
 
         try {
