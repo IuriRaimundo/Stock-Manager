@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.geometry.Insets?>
+
+<fx:root type="HBox" fx:controller="com.stockmanager.controller.components.TopBarController"
+      fx:id="topBar"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="50" style="-fx-background-color: #373737"
+      alignment="CENTER_RIGHT"
+>
+    <padding>
+        <Insets right="10"/>
+    </padding>
+    <Label fx:id="topBarLabel"
+           text="Stock Manager"
+           textFill="white"
+           GridPane.valignment="CENTER"
+           prefHeight="50">
+        <font>
+            <Font name="Segoe UI bold" size="15"/>
+        </font>
+    </Label>
+</fx:root>

@@ -4,9 +4,14 @@ import com.stockmanager.model.common.Manager;
 import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class StorageManager extends Manager {
+public class StorageManager extends Manager implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final String STORAGE_MANAGER_DATAFILE_NAME = "StorageManager.dat";
 

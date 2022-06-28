@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<?import com.stockmanager.view.components.Card?>
+<GridPane
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.stockmanager.controller.screens.HomeScreenController"
+>
+    <columnConstraints>
+        <ColumnConstraints percentWidth="100"/>
+    </columnConstraints>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text="Stock Manager" textFill="#38a117">
+        <padding>
+            <Insets top="10" left="15"/>
+        </padding>
+        <font>
+            <Font name="Segoe UI bold" size="30"/>
+        </font>
+    </Label>
+    <FlowPane GridPane.columnIndex="0" GridPane.rowIndex="1" hgap="30" vgap="30">
+        <padding>
+            <Insets topRightBottomLeft="25"/>
+        </padding>
+        <Card fx:id="totalGainCard" titleText="Receitas" bodyText="350.32€"/>
+        <Card titleText="Quebra de produtos" bodyText="50.89€"/>
+        <Card titleText="Lote (Unidades)" bodyText="204"/>
+        <Card titleText="Entrada de produto 16/05/2022" bodyText="25"/>
+        <Card titleText="Saída de produto 16/05/2022" bodyText="39"/>
+    </FlowPane>
+</GridPane>

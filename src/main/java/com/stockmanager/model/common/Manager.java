@@ -2,7 +2,14 @@ package com.stockmanager.model.common;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class Manager {
+import java.io.Serial;
+import java.io.Serializable;
+
+public abstract class Manager implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     public final String DATAFILE_NAME;
 
     public Manager(@NotNull String DATAFILE_NAME) {

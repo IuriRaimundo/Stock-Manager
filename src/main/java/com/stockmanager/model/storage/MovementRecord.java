@@ -3,9 +3,14 @@ package com.stockmanager.model.storage;
 import com.stockmanager.model.common.IdGenerator;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-abstract public class MovementRecord {
+abstract public class MovementRecord implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final IdGenerator idGenerator = new IdGenerator("M");
 

@@ -1,13 +1,19 @@
 package com.stockmanager.model.storage;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.storage.exceptions.*;
 
 
-public class Lot {
+public class Lot implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final IdGenerator idGenerator = new IdGenerator("L");
 

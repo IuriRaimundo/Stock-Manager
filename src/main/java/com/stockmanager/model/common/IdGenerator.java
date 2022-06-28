@@ -1,11 +1,16 @@
 package com.stockmanager.model.common;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Classe de geração de IDs úncios com um prefixo
  */
-public class IdGenerator  {
+public class IdGenerator implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private final String ID_PREFIX;
     private final AtomicInteger ID_COUNTER;

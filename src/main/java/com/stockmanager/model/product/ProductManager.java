@@ -1,7 +1,6 @@
 package com.stockmanager.model.product;
 
 import com.stockmanager.model.common.Manager;
-import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,9 +8,14 @@ import com.stockmanager.model.product.exceptions.*;
 import com.stockmanager.model.utils.HashMapUtils;
 import com.stockmanager.model.utils.exceptions.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class ProductManager extends Manager {
+public class ProductManager extends Manager implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public static final String PRODUCT_MANAGER_DATAFILE = "ProductManager.dat";
 

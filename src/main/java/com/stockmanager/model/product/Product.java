@@ -1,12 +1,18 @@
 package com.stockmanager.model.product;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.product.exceptions.*;
 
 
-public class Product {
+public class Product implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final IdGenerator idGenerator = new IdGenerator("P");
 

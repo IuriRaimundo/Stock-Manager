@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import com.stockmanager.view.components.Menu?>
+<?import com.stockmanager.view.components.TopBar?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.Label?>
+<BorderPane
+        xmlns:fx="http://javafx.com/fxml"
+        stylesheets="@css/styles.css"
+        fx:id="mainBorderPane"
+>
+    <top>
+        <TopBar />
+    </top>
+    <left>
+        <Menu />
+    </left>
+    <center>
+        <Label text="Hello World"/>
+    </center>
 
-</AnchorPane>
+</BorderPane>
+
+

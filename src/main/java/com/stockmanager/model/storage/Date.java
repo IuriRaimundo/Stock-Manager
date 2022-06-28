@@ -6,6 +6,8 @@ package com.stockmanager.model.storage;
  * and open the template in the editor.
  */
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,7 +17,10 @@ import java.util.GregorianCalendar;
  *
  * @author rsmal
  */
-public class Date {
+public class Date implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     Calendar calendar;
 

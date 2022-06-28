@@ -1,0 +1,10 @@
+@import url("globalColors.css");
+
+.card_css {
+    -fx-padding: 10;
+    -fx-background-color: -White;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-width: 1;
+    -fx-border-color: -BorderWhite;
+}

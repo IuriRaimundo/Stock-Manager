@@ -1,0 +1,32 @@
+@import url("globalColors.css");
+
+.menu {
+    -fx-background-color: #373737;
+    -fx-padding: 0;
+}
+
+.menuButton{
+    -fx-background-color: -menuBackgroundColor;
+    -fx-background-radius: 0em;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-padding: 15;
+    -fx-text-fill: -White;
+    -fx-alignment: CENTER-LEFT;
+    -fx-pref-width: Infinity;
+    -fx-graphic-text-gap: 10;
+}
+
+.menuButton:hover{
+    -fx-background-color: -secondaryColor;
+}
+
+.menuButton:pressed{
+    -fx-background-color: -primaryColor;
+}
+
+.menuButton:focused{
+    -fx-background-color: -primaryColor;
+    -fx-border-color: -BorderWhite;
+    -fx-border-width: 0px 0px 0px 3px;
+}
