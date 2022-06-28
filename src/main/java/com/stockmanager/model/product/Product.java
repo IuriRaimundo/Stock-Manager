@@ -94,9 +94,9 @@ public class Product {
 
     /**
      * @param price Novo preço
-     * @throws UnkownCategory Se o preço for inferior ou igual a 0
+     * @throws InvalidProductPriceException Se o preço for inferior ou igual a 0
      */
-    void setPrice(double price) throws UnkownCategory {
+    void setPrice(double price) throws UnkownCategoryException {
         if (price >= 0) {
             throw new InvalidProductPriceException(price);
         }

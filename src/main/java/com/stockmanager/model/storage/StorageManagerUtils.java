@@ -1,5 +1,7 @@
 package com.stockmanager.model.storage;
 
+import com.stockmanager.model.product.ProductManager;
+import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import com.stockmanager.model.storage.exceptions.InvalidLotExpirationDateException;
 import com.stockmanager.model.storage.exceptions.DuplicateLotEntryException;
 
@@ -16,16 +18,24 @@ abstract public class StorageManagerUtils {
      * @throws DuplicateLotEntryException Se o lote já estiver guardado nos storedLots
      */
     static void validateLotEntry(LotEntryRecord lotEntryRecord, LinkedList<Lot> storedLots) {
+
+        Lot lot = lotEntryRecord.getLot();
+
         // Validar data de expiração
-        Date expirationDate =  lotEntryRecord.getLot().getExpirationDate();
+        Date expirationDate =  lot.getExpirationDate();
         // Se data de expiração for inferior à data atual, lançar exceção
         if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
             throw new InvalidLotExpirationDateException(expirationDate);
         }
 
         // Validar unicidade do lote
-        if (storedLots.contains(lotEntryRecord.getLot())) {
+        if (storedLots.contains(lot)) {
             throw new DuplicateLotEntryException(lotEntryRecord.getLot());
+        }
+
+        // Verificar se o produto existe no ProductManager
+        if (!ProductManager.getProductManager().productExists(lot.getProduct())) {
+            throw new ProductNotFoundException(lot.getProduct().getId());
         }
 
     }

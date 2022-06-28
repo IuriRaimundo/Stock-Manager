@@ -1,11 +1,14 @@
 package com.stockmanager.model.storage;
 
+import com.stockmanager.model.common.Manager;
 import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
-public class StorageManager {
+public class StorageManager extends Manager {
+
+    private static final String STORAGE_MANAGER_DATAFILE_NAME = "StorageManager.dat";
 
     // Lotes armazenados
     private final LinkedList<Lot> storedLots;
@@ -18,13 +21,14 @@ public class StorageManager {
     // Registos de quebra de produtos de um lote
     private final LinkedList<ProductBreakageRecord> productBreakageRecords;
 
-    private static final StorageManager instance = new StorageManager();
+    private static StorageManager instance = new StorageManager();
 
     public static StorageManager getStockManager () {
         return instance;
     }
 
     private StorageManager() {
+        super(STORAGE_MANAGER_DATAFILE_NAME);
         this.storedLots = new LinkedList<>();
         this.lotHistory = new LinkedList<>();
         this.lotEntryRecords = new LinkedList<>();
