@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<fx:root fx:id="root"
+         type="GridPane"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.stockmanager.controller.components.CardController"
+         maxHeight="200"
+         styleClass="lightButton" stylesheets="@../css/card.css">
+    <Label fx:id="titleLabel"
+           prefWidth="250" GridPane.columnIndex="0" GridPane.rowIndex="0"
+           text="Receitas" textFill="#38a117">
+        <padding>
+            <Insets left="10" top="5"/>
+        </padding>
+        <font>
+            <Font name="Segoe UI" size="15"/>
+        </font>
+    </Label>
+    <Label fx:id="bodyLabel"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+           text="350€" prefHeight="200" prefWidth="250"
+           alignment="CENTER">
+        <padding>
+            <Insets top="-10"/>
+        </padding>
+        <font>
+            <Font name="Segoe UI bold" size="30"/>
+        </font>
+    </Label>
+</fx:root>

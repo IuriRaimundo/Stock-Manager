@@ -17,7 +17,7 @@
         <Menu />
     </left>
     <center>
-        <Label text="Hello World"/>
+        <fx:include source="screens/HomeScreen.fxml"/>
     </center>
 
 </BorderPane>

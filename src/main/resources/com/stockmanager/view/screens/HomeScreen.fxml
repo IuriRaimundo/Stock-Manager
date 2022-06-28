@@ -25,7 +25,7 @@
         <padding>
             <Insets topRightBottomLeft="25"/>
         </padding>
-        <Card fx:id="totalGainCard" titleText="Receitas" bodyText="350.32€"/>
+            <Card fx:id="totalGainCard" titleText="Receitas"/>
         <Card titleText="Quebra de produtos" bodyText="50.89€"/>
         <Card titleText="Lote (Unidades)" bodyText="204"/>
         <Card titleText="Entrada de produto 16/05/2022" bodyText="25"/>
