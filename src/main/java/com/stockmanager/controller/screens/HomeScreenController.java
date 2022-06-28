@@ -1,6 +1,7 @@
 package com.stockmanager.controller.screens;
 
 import com.stockmanager.controller.components.CardController;
+import com.stockmanager.model.storage.ProductBreakageRecord;
 import com.stockmanager.model.storage.ProductIssueRecord;
 import com.stockmanager.model.storage.StorageManager;
 import com.stockmanager.view.components.Card;
@@ -13,34 +14,39 @@ import java.util.ResourceBundle;
 public class HomeScreenController implements Initializable {
     @FXML
     private Card totalGainCard;
-    private Card totalBreakageProduct;
-    private Card totalLot;
-    private Card totalEntryProduct;
-    private Card totalExitProduct;
+    @FXML
+    private Card totalBreakageProductCard;
+    private Card totalLotCard;
+    private Card totalEntryProductCard;
+    private Card totalExitProductCard;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         double totalProductIssueGain = calculateTotalProductIssueGain();
-        totalGainCard.getController().updateBodyLabel(String.valueOf(totalProductIssueGain));
+        totalGainCard.getController().updateBodyLabel(String.valueOf(totalProductIssueGain) + "€");
+
+        double totalBreakageProduct = calculateTotalBreakageProduct();
+        totalBreakageProductCard.getController().updateBodyLabel(String.valueOf(totalBreakageProduct) + "€");
     }
 
  private double calculateTotalProductIssueGain () {
      double gainValue = 0;
 
-     for (ProductIssueRecord r : StorageManager.getStockManager().getProductIssueRecords()) {
+     for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
          gainValue += r.getGainValue();
      }
      return gainValue;
  }
-    private double calculateTotalBreakageProduct() {
-        double gainValue = 0;
 
-        for (ProductIssueRecord r : StorageManager.getStockManager().getProductIssueRecords()) {
-            gainValue += r.getGainValue();
+    private double calculateTotalBreakageProduct() {
+        double lossValue = 0;
+
+        for (ProductBreakageRecord r : StorageManager.getStorageManager().getProductBreakageRecords()) {
+            lossValue += r.getLossValue();
         }
 
-        return gainValue;
+        return lossValue;
     }
 }
