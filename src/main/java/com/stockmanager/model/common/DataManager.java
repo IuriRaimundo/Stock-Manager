@@ -40,7 +40,6 @@ public class DataManager<ManagerClass extends Manager> {
             // Ler instância do datafile
             fis = new FileInputStream(df);
             in = new ObjectInputStream(fis);
-            Object object = in.readObject();
             instance = (ManagerClass) in.readObject();
 
             System.out.println(instance.getClass().getSimpleName() + " data loaded.");
