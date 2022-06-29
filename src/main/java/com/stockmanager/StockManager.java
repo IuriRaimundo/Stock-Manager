@@ -24,6 +24,8 @@ public class StockManager extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        stage.setMinWidth(1400);
+        stage.setMinHeight(720);
         stage.show();
     }
 

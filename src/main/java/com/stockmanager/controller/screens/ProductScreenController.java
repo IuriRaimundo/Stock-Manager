@@ -6,6 +6,8 @@ import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.ProductPricingUnit;
 import com.stockmanager.model.storage.StorageManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,31 +32,43 @@ public class ProductScreenController implements Initializable {
     @FXML
     private TableColumn<Product, IdGenerator> toID;
     @FXML
-  private TableColumn<Product, String> toName;
+    private TableColumn<Product, String> toName;
     @FXML
-    private TableColumn<Product, Category> toCategory;
+    private TableColumn<Product, String> toCategory;
     @FXML
-    private TableColumn<Product, String>toBrand;
+    private TableColumn<Product, String> toBrand;
     @FXML
     private TableColumn<Product, Double> toPrice;
     @FXML
-    private TableColumn<Product, Integer>toUnity;
+    private TableColumn<Product, Integer> toUnity;
     @FXML
     private TableColumn<Product, String> toState;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        toCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        // Construir coluna com a propriedade nome da categoria do produto
+        toCategory.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getCategory().getName()));
+
         toBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         toPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         toUnity.setCellValueFactory(new PropertyValueFactory<>("productPricingUnit"));
-        toState.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 
+        // Construir coluna de estado do produto
+        toState.setCellValueFactory(p -> {
+            Product product = p.getValue();
+            if (product.getIsActive()) {
+                return new SimpleStringProperty("Ativo");
+            } else {
+                return new SimpleStringProperty("Inativo");
+            }
+        });
 
         ObservableList<Product> productList =
                 FXCollections.observableArrayList(ProductManager.getProductManager().getProducts().values());
 
+        // Popular tabela com a lista
         toProduct.setItems(productList);
     }
 
