@@ -46,6 +46,7 @@ public class ProductScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        toID.setCellValueFactory(new PropertyValueFactory<>("id"));
         toName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         // Construir coluna com a propriedade nome da categoria do produto

@@ -4,22 +4,22 @@
 <?import com.stockmanager.view.components.Menu?>
 <?import com.stockmanager.view.components.TopBar?>
 
-<?import javafx.scene.control.Label?>
-<BorderPane
-        xmlns:fx="http://javafx.com/fxml"
-        stylesheets="@css/styles.css"
-        fx:id="mainBorderPane"
->
+<fx:root type="BorderPane"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:id="mainBorderPane"
+    stylesheets="@css/styles.css"
+    fx:controller="com.stockmanager.controller.MainBorderPaneController"
+    >
     <top>
-        <TopBar />
+        <TopBar/>
     </top>
     <left>
-        <Menu />
+        <Menu/>
     </left>
     <center>
         <fx:include source="screens/HomeScreen.fxml"/>
     </center>
 
-</BorderPane>
+</fx:root>
 
 

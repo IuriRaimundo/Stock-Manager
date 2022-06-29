@@ -33,8 +33,7 @@
         </HBox>
         <HBox GridPane.rowIndex="0" GridPane.columnIndex="1"
               alignment="CENTER_RIGHT"
-              spacing="10"
-        >
+              spacing="10">
             <Button onAction="#addCategoryButton" styleClass="darkButton" text="Adicionar Categoria"/>
             <Button onAction="#removeCategoryButton" styleClass="darkButton" text="Remover Categoria"/>
         </HBox>

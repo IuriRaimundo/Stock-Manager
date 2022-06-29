@@ -34,10 +34,10 @@ public class HomeScreenController implements Initializable {
         double totalProductIssueGain = calculateTotalProductIssueGain();
         totalGainCard.getController().updateBodyLabel(String.valueOf(totalProductIssueGain) + "€");
 
-        double totalLot = calculateTotalLot();
+        int totalLot = (int) calculateTotalLot();
         totalLotCard.getController().updateBodyLabel(String.valueOf(totalLot));
 
-        double totalProductIssueRecord = calculateTotalProductIssueRecord();
+        int totalProductIssueRecord = (int) calculateTotalProductIssueRecord();
         totalExitProductCard.getController().updateBodyLabel(String.valueOf(totalProductIssueRecord));
 
         totalExitProductCard.getController().updateTitleLabel("Saída de produtos " + formatDate.format(LocalDateTime.now()));
@@ -45,8 +45,8 @@ public class HomeScreenController implements Initializable {
         double totalBreakageProduct = calculateTotalBreakageProduct();
         totalBreakageProductCard.getController().updateBodyLabel(String.valueOf(totalBreakageProduct) + "€");
 
-        double totalEntryProduct = calculateTotalEntryProduct();
-        totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct) + "€");
+        int totalEntryProduct = (int) calculateTotalEntryProduct();
+        totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct));
 
         totalEntryProductCard.getController().updateTitleLabel("Entrada de produutos " + formatDate.format(LocalDateTime.now()));
     }

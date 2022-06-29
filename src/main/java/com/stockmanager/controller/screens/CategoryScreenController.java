@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
@@ -21,6 +22,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CategoryScreenController implements Initializable {
+    @FXML
+    private TextField searchTextField;
     @FXML
     private TableView<Category> toCategory;
     @FXML
@@ -37,7 +40,6 @@ public class CategoryScreenController implements Initializable {
 
         toCategory.setItems(categoryList);
     }
-
 
     public void addCategoryButton(ActionEvent event){
         Node source = (Node) event.getSource();
@@ -82,6 +84,4 @@ public class CategoryScreenController implements Initializable {
         }
 
     }
-
-
 }

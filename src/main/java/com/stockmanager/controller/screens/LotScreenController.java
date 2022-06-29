@@ -1,7 +1,10 @@
 package com.stockmanager.controller.screens;
 
+import com.stockmanager.controller.MainBorderPaneController;
+import com.stockmanager.model.product.Product;
 import com.stockmanager.model.storage.Lot;
 import com.stockmanager.model.storage.StorageManager;
+import com.stockmanager.view.components.MainBorderPane;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,11 +25,11 @@ import java.util.ResourceBundle;
 
 public class LotScreenController implements Initializable {
     @FXML
-    private TableView<Lot> LotTable;
+    private TableView<Lot> lotTable;
     @FXML
     private TableColumn<Lot, String> toID;
     @FXML
-    private TableColumn<Lot, String> toProductName;
+    private TableColumn<Lot, String> toProduct;
     @FXML
     private TableColumn<Lot, Integer> toQuantity;
     @FXML
@@ -35,14 +38,24 @@ public class LotScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toID.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getId()));
-        toProductName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getProduct().getName()));
+        toProduct.setCellValueFactory(p -> {
+
+            Product product = p.getValue().getProduct();
+
+            String output = "(" + product.getId() + ") " + product.getName();
+
+            return new SimpleStringProperty(output);
+
+        });
+
+
         toQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         toDate.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getExpirationDate().toString()));
 
         ObservableList<Lot> lotList =
                 FXCollections.observableArrayList(StorageManager.getStorageManager().getStoredLots().stream().toList());
 
-        LotTable.setItems(lotList);
+        lotTable.setItems(lotList);
     }
 
 
@@ -53,7 +66,7 @@ public class LotScreenController implements Initializable {
 
         Label topBarLabel = (Label) scene.lookup("#topBarLabel");
 
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
+        MainBorderPane mainBorderPane = (MainBorderPane) scene.lookup("#mainBorderPane");
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("com/prototipo/prototipomsi/screens/RegistarEntradaDeLote.fxml"));
@@ -63,6 +76,7 @@ public class LotScreenController implements Initializable {
             mainBorderPane.setCenter(fxmlLoader.load());
         } catch (Exception e) {
             e.printStackTrace();
+            mainBorderPane.getController().showError(e);
         }
 
     }

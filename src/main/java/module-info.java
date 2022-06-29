@@ -12,4 +12,6 @@ module com.stockmanager {
 
 
     exports com.stockmanager;
+    opens com.stockmanager.view to javafx.fxml;
+    opens com.stockmanager.controller to javafx.fxml;
 }

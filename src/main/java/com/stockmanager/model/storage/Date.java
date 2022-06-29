@@ -45,6 +45,10 @@ public class Date implements Serializable {
         return new Date(day, month, year);
     }
 
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
     @Override
     public String toString() {
         return calendar.get(Calendar.DAY_OF_MONTH) + "/" +
