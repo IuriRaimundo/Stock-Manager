@@ -5,6 +5,9 @@ import com.stockmanager.model.product.Category;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.ProductPricingUnit;
+import com.stockmanager.model.storage.Date;
+import com.stockmanager.model.storage.Lot;
+import com.stockmanager.model.storage.LotEntryRecord;
 import com.stockmanager.model.storage.StorageManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +66,23 @@ public class StockManager extends Application {
         for (Product product : products) {
             productManager.addProduct(product);
         }
+
+        StorageManager storageManager = StorageManager.getStorageManager();
+
+        Lot l1 = new Lot(p3, new Date(30, 10, 2040), 90);
+        Lot l2 = new Lot(p2, new Date(15, 7, 2022), 30);
+        Lot l3 = new Lot(p2, new Date(20, 8, 2022), 50);
+
+        LotEntryRecord ler1 = new LotEntryRecord(l1);
+        LotEntryRecord ler2 = new LotEntryRecord(l2);
+        LotEntryRecord ler3 = new LotEntryRecord(l3);
+
+        Lot[] lots = {l1, l2, l3};
+
+        for (Lot lot : lots) {
+            storageManager.registerLotEntry(new LotEntryRecord(lot));
+        }
+
     }
 
     @Override
