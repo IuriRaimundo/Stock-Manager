@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+
 <fx:root type="VBox"
          fx:controller="com.stockmanager.controller.components.MenuController"
          fx:id="menu"
@@ -12,35 +12,35 @@
          stylesheets="@../css/menu.css"
          styleClass="menu"
          alignment="TOP_CENTER" prefWidth="250">
-    <Button fx:id="homeBtn" text="Home" styleClass="menuButton" onAction="#homeBtnClickHandler">
+    <Button text="Home" styleClass="menuButton" onAction="#homeBtnClickHandler">
         <graphic>
             <ImageView fitHeight="20" preserveRatio="true" >
                 <Image url="@icons/home.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="productBtn" text="Produtos" styleClass="menuButton" onAction="#productBtnClickHandler">
+    <Button text="Produtos" styleClass="menuButton" onAction="#productBtnClickHandler">
         <graphic>
             <ImageView fitHeight="20" preserveRatio="true" >
                 <Image url="@icons/product.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="categoryBtn" text="Categorias" styleClass="menuButton" onAction="#categoryBtnClickHandler">
+    <Button text="Categorias" styleClass="menuButton" onAction="#categoryBtnClickHandler">
         <graphic>
             <ImageView fitHeight="20" preserveRatio="true" >
                 <Image url="@icons/category.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="stockBtn" text="Lotes" styleClass="menuButton" onAction="#stockBtnClickHandler">
+    <Button text="Lotes" styleClass="menuButton" onAction="#stockBtnClickHandler">
         <graphic>
             <ImageView fitHeight="20" preserveRatio="true" >
                 <Image url="@icons/stock.png"/>
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="movementsBtn" text="Movimentos de Lote" styleClass="menuButton" onAction="#movementsBtnClickHandler">
+    <Button text="Movimentos de Lote" styleClass="menuButton" onAction="#movementsBtnClickHandler">
         <graphic>
             <ImageView fitHeight="20" preserveRatio="true" >
                 <Image url="@icons/movements.png"/>
