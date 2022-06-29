@@ -56,42 +56,42 @@
         <padding>
             <Insets topRightBottomLeft="20" />
         </padding>
-        <TableView styleClass="mainTable">
+        <TableView fx:id="toProduct" styleClass="mainTable">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn text="ID" prefWidth="60">
+                <TableColumn fx:id="toID" text="ID" prefWidth="60">
                     <cellValueFactory>
                         <PropertyValueFactory property="id"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Nome do produto" prefWidth="250">
+                <TableColumn fx:id="toName" text="Nome do produto" prefWidth="250">
                     <cellValueFactory>
                         <PropertyValueFactory property="name"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Categoria" prefWidth="200">
+                <TableColumn fx:id="toCategory" text="Categoria" prefWidth="200">
                     <cellValueFactory>
                         <PropertyValueFactory property="category"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Marca" prefWidth="100">
+                <TableColumn fx:id="toBrand" text="Marca" prefWidth="100">
                     <cellValueFactory>
                         <PropertyValueFactory property="brand"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Preço" prefWidth="110">
+                <TableColumn fx:id="toPrice" text="Preço" prefWidth="110">
                     <cellValueFactory>
                         <PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Unidade" prefWidth="70">
+                <TableColumn fx:id="toUnity" text="Unidade" prefWidth="70">
                     <cellValueFactory>
                         <PropertyValueFactory property="unit"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Estado" prefWidth="130">
+                <TableColumn fx:id="toState" text="Estado" prefWidth="130">
                     <cellValueFactory>
                         <PropertyValueFactory property="active"/>
                     </cellValueFactory>
@@ -99,15 +99,7 @@
             </columns>
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <Product id="P01" name="Alface Frisada" category="Legumes" brand="Frescos LTD" price="0.99" unit="UN" active="true"/>
-                    <Product id="P02" name="Cenoura" category="Legumes" brand="Frescos LTD" price="0.99" unit="KG" active="true"/>
-                    <Product id="P03" name="Batata" category="Legumes" brand="Frescos LTD" price="2.99" unit="KG" active="true"/>
-                    <Product id="P04" name="Cebola Roxa" category="Legumes" brand="Frescos LTD" price="1.99" unit="KG" active="false"/>
-                    <Product id="P05" name="Alface Frisada" category="Fruta" brand="Frescos LTD" price="0.99" unit="UN" active="true"/>
-                    <Product id="P06" name="Maça" category="Fruta" brand="Frescos LTD" price="0.99" unit="KG" active="true"/>
-                    <Product id="P07" name="Banana" category="Fruta" brand="Frescos LTD" price="0.89" unit="KG" active="true"/>
-                    <Product id="P08" name="Morango" category="Fruta" brand="Frescos LTD" price="1.99" unit="KG" active="true"/>
-                </FXCollections>
+                     </FXCollections>
             </items>
         </TableView>
     </VBox>

@@ -134,7 +134,7 @@ public class ProductManager extends Manager implements Serializable {
         // Atualizar produto
         productToUpdate.setPrice(product.getPrice());
         productToUpdate.setName(product.getName());
-        productToUpdate.setActive(product.getActive());
+        productToUpdate.setActive(product.getIsActive());
     }
 
     /**

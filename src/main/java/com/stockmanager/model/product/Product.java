@@ -115,7 +115,7 @@ public class Product implements Serializable {
     /**
      * @return Estado do produto, verdadeiro se está ativo e falso se estiver desativado.
      */
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 

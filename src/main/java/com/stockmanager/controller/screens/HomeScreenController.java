@@ -52,7 +52,8 @@ public class HomeScreenController implements Initializable {
     }
 
     /**
-     * @return VALOR TOTAL DA RECEITA
+     * Método para calcular o total da soma da saída de produtos (ganho)
+     * @return Valor total da receita
      */
  private double calculateTotalProductIssueGain () {
      double gainValue = 0;
@@ -64,7 +65,8 @@ public class HomeScreenController implements Initializable {
  }
 
     /**
-     * @return VALOR TOTAL DA QUEBRA DE PRODUTOS
+     * Método para calcular o total da soma da quebra de produtos
+     * @return Valor total da quebra de produtos
      */
     private double calculateTotalBreakageProduct() {
         double lossValue = 0;
@@ -77,7 +79,8 @@ public class HomeScreenController implements Initializable {
     }
 
     /**
-     * @return VALOR TOTAL DA SAÍDA DE PRODUTO
+     * Método para calcular o total de produtos da lista de saída de produtos
+     * @return Valor total da saída de produtos
      */
     private double calculateTotalProductIssueRecord() {
         int productIssueRecordValue;
@@ -87,7 +90,8 @@ public class HomeScreenController implements Initializable {
         return productIssueRecordValue;
     }
     /**
-     * @return VALOR TOTAL DO LOTE
+     * Método para calcular o total de lotes da lista de lotes
+     * @return Valor total do número de lotes lote
      */
     private double calculateTotalLot() {
         int lot;
@@ -97,7 +101,8 @@ public class HomeScreenController implements Initializable {
     }
 
     /**
-     * @return VALOR TOTAL DA ENTRADA DE PRODUTO
+     * Método para calcular a soma da entrada de produtos
+     * @return Valor total da entrada de produtos
      */
     private double calculateTotalEntryProduct (){
         double gainValue = 0;
