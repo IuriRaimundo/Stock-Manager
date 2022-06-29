@@ -1,14 +1,16 @@
 package com.stockmanager.controller.screens;
 
 import com.stockmanager.controller.components.CardController;
-import com.stockmanager.model.storage.ProductBreakageRecord;
-import com.stockmanager.model.storage.ProductIssueRecord;
-import com.stockmanager.model.storage.StorageManager;
+import com.stockmanager.model.storage.*;
 import com.stockmanager.view.components.Card;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class HomeScreenController implements Initializable {
@@ -16,21 +18,37 @@ public class HomeScreenController implements Initializable {
     private Card totalGainCard;
     @FXML
     private Card totalBreakageProductCard;
+    @FXML
     private Card totalLotCard;
+    @FXML
     private Card totalEntryProductCard;
+    @FXML
     private Card totalExitProductCard;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         double totalProductIssueGain = calculateTotalProductIssueGain();
         totalGainCard.getController().updateBodyLabel(String.valueOf(totalProductIssueGain) + "€");
+
+        double totalLot = calculateTotalLot();
+        totalLotCard.getController().updateBodyLabel(String.valueOf(totalLot));
+
+        double totalProductIssueRecord = calculateTotalProductIssueRecord();
+        totalExitProductCard.getController().updateBodyLabel(String.valueOf(totalProductIssueRecord));
+
+        totalExitProductCard.getController().updateTitleLabel("Saída de produtos " + formatDate.format(LocalDateTime.now()));
 
         double totalBreakageProduct = calculateTotalBreakageProduct();
         totalBreakageProductCard.getController().updateBodyLabel(String.valueOf(totalBreakageProduct) + "€");
     }
 
+    /**
+     * @return VALOR TOTAL DA RECEITA
+     */
  private double calculateTotalProductIssueGain () {
      double gainValue = 0;
 
@@ -40,6 +58,9 @@ public class HomeScreenController implements Initializable {
      return gainValue;
  }
 
+    /**
+     * @return VALOR TOTAL DA QUEBRA DE PRODUTOS
+     */
     private double calculateTotalBreakageProduct() {
         double lossValue = 0;
 
@@ -48,5 +69,16 @@ public class HomeScreenController implements Initializable {
         }
 
         return lossValue;
+    }
+
+    /**
+     * @return VALOR TOTAL DA SAÍDA DE PRODUTO
+     */
+    private double calculateTotalProductIssueRecord() {
+        int productIssueRecordValue;
+        LinkedList<ProductIssueRecord> list = StorageManager.getStorageManager().getProductIssueRecords();
+        productIssueRecordValue = list.size();
+
+        return productIssueRecordValue;
     }
 }

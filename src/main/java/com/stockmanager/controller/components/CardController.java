@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CardController implements Initializable {
@@ -26,5 +28,10 @@ public class CardController implements Initializable {
     public void updateBodyLabel (String text)
     {
         bodyLabel.setText(text);
+    }
+
+    public void updateTitleLabel (String text)
+    {
+        titleLabel.setText(text);
     }
 }

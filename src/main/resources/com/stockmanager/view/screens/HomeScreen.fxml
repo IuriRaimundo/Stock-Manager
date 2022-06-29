@@ -26,9 +26,9 @@
             <Insets topRightBottomLeft="25"/>
         </padding>
             <Card fx:id="totalGainCard" titleText="Receitas"/>
-        <Card fx:id="totalBreakageProductCard" titleText="Quebra de produtos" bodyText="50.89€"/>
-        <Card titleText="Lote (Unidades)" bodyText="204"/>
-        <Card titleText="Entrada de produto 16/05/2022" bodyText="25"/>
-        <Card titleText="Saída de produto 16/05/2022" bodyText="39"/>
+            <Card fx:id="totalBreakageProductCard" titleText="Quebra de produtos"/>
+            <Card fx:id="totalLotCard" titleText="Lote (Unidades)"/>
+            <Card fx:id="totalEntryProductCard" titleText="Entrada de produto 16/05/2022"/>
+            <Card fx:id="totalExitProductCard" titleText="Saída de produto 16/05/2022"/>
     </FlowPane>
 </GridPane>
