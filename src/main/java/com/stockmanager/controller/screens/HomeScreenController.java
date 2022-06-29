@@ -44,6 +44,11 @@ public class HomeScreenController implements Initializable {
 
         double totalBreakageProduct = calculateTotalBreakageProduct();
         totalBreakageProductCard.getController().updateBodyLabel(String.valueOf(totalBreakageProduct) + "€");
+
+        double totalEntryProduct = calculateTotalEntryProduct();
+        totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct) + "€");
+
+        totalEntryProductCard.getController().updateTitleLabel("Entrada de produutos " + formatDate.format(LocalDateTime.now()));
     }
 
     /**
@@ -80,5 +85,26 @@ public class HomeScreenController implements Initializable {
         productIssueRecordValue = list.size();
 
         return productIssueRecordValue;
+    }
+    /**
+     * @return VALOR TOTAL DO LOTE
+     */
+    private double calculateTotalLot() {
+        int lot;
+        LinkedList<Lot> lotList = StorageManager.getStorageManager().getStoredLots();
+        lot = lotList.size();
+        return lot;
+    }
+
+    /**
+     * @return VALOR TOTAL DA ENTRADA DE PRODUTO
+     */
+    private double calculateTotalEntryProduct (){
+        double gainValue = 0;
+
+        for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
+            gainValue += r.getGainValue();
+        }
+        return gainValue;
     }
 }
