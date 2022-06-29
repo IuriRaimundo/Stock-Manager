@@ -22,7 +22,7 @@ public class Category implements Serializable {
     /**
      * @param name Nome da categoria
      */
-    Category(@NotNull String name) {
+    public Category(@NotNull String name) {
         this.id = idGenerator.generateId();
         setName(Objects.requireNonNull(name));
     }

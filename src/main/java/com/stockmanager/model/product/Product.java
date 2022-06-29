@@ -100,12 +100,8 @@ public class Product implements Serializable {
 
     /**
      * @param price Novo preço
-     * @throws InvalidProductPriceException Se o preço for inferior ou igual a 0
      */
-    void setPrice(double price) throws UnkownCategoryException {
-        if (price >= 0) {
-            throw new InvalidProductPriceException(price);
-        }
+    void setPrice(double price) {
         this.price = price;
     }
 
