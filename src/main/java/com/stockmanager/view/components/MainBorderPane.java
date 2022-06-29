@@ -1,7 +1,6 @@
 package com.stockmanager.view.components;
 
 import com.stockmanager.controller.MainBorderPaneController;
-import com.stockmanager.controller.components.CardController;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
