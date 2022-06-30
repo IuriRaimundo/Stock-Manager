@@ -38,7 +38,7 @@ public class RegisterProductIssueFormController extends FormController implement
     }
 
     public RegisterProductIssueFormController(String targetScreen ) {
-        super("Registar Saída de Produto", "LotScreen");//TODO TARGET SCREEN
+        super("Registar Saída de Produto", "LotMovementScreen");
     }
 
     @Override
