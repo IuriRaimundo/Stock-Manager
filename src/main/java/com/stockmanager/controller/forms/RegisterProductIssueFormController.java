@@ -34,7 +34,7 @@ public class RegisterProductIssueFormController extends FormController implement
     @FXML private Spinner<Integer> spnQuantity;
 
     public RegisterProductIssueFormController() {
-        super("Registar Saída de Produto", "LotScreen");
+        super("Registar Saída de Produto", "LotMovementScreen");
     }
 
     public RegisterProductIssueFormController(String targetScreen ) {
