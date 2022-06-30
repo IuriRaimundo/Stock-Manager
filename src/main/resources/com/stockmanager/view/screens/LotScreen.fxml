@@ -34,9 +34,9 @@
         <HBox GridPane.rowIndex="0" GridPane.columnIndex="1"
               alignment="CENTER_RIGHT"
               spacing="10">
-            <Button onAction="#registerBrokenStockButton" styleClass="darkButton" text="Registar Quebra De Produto"/>
-            <Button onAction="#registerEntryStockButton" styleClass="darkButton" text="Registar Entrada De Lote"/>
-            <Button onAction="#registerExitStockButton" styleClass="darkButton" text="Registar Saída De Produtos"/>
+            <Button onAction="#registerProductBreakageBtn" styleClass="darkButton" text="Registar Quebra De Produto"/>
+            <Button onAction="#registerLotEntryBtn" styleClass="darkButton" text="Registar Entrada De Lote"/>
+            <Button onAction="#registerProductIssueBtn" styleClass="darkButton" text="Registar Saída De Produtos"/>
         </HBox>
     </GridPane>
 

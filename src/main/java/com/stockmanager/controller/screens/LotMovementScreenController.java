@@ -3,6 +3,7 @@ import com.stockmanager.model.product.Category;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.storage.*;
+import com.stockmanager.view.components.MainBorderPane;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -93,18 +95,10 @@ public class LotMovementScreenController implements Initializable {
 
 
     public void registerEntryStockButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-        Scene scene = source.getScene();
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/RegistarEntradaDeLote.fxml"));
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Entrada de Lote");
-            }
-            mainBorderPane.setCenter(fxmlLoader.load());
+            MainBorderPane.controller.openForm("RegisterProductIssueForm");
         } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
 

@@ -91,68 +91,30 @@ public class LotScreenController implements Initializable {
         lotTable.setItems(lotList);
     }
 
-    public void registerEntryStockButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        MainBorderPane mainBorderPane = (MainBorderPane) scene.lookup("#mainBorderPane");
-
+    public void registerLotEntryBtn(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("com/prototipo/prototipomsi/screens/RegistarEntradaDeLote.fxml"));
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Entrada de Lote");
-            }
-            mainBorderPane.setCenter(fxmlLoader.load());
+            MainBorderPane.controller.openForm("RegisterLotEntryForm");
         } catch (Exception e) {
-            e.printStackTrace();
-            mainBorderPane.getController().showError(e);
-        }
-
-    }
-
-    public void registerExitStockButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/RegistarSaidaDeProdutos.fxml"));
-            mainBorderPane.setCenter(fxmlLoader.load());
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Saída de Produtos");
-            }
-
-        } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
 
     }
 
-    public void registerBrokenStockButton(ActionEvent actionEvent) {
-        Node source = (Node) actionEvent.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
+    public void registerProductIssueBtn(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/RegistarQuebraDeProduto.fxml"));
-            mainBorderPane.setCenter(fxmlLoader.load());
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Quebra de Produto");
-            }
-
+            MainBorderPane.controller.openForm("RegisterProductIssueForm");
         } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void registerProductBreakageBtn(ActionEvent actionEvent) {
+        try {
+            MainBorderPane.controller.openForm("RegisterBreakageProductForm");
+        } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
     }
