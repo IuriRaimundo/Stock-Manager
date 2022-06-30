@@ -118,15 +118,18 @@ public class StorageManager implements Serializable {
      * @param productIssueRecord Registo de saída de produtos de um lote
      * @throws InvalidLotQuantityException Se a quantidade do produto após subtração da quantidade movida for negativa
      * @throws LotNotFoundException Se o lote do movimento não se encontra na lista de lotes ativos.
+     * @throws InvalidMovementMovedQuantityException Se a quantidade movida for menor ou igual a 0.
      */
     public void registerProductIssue(@NotNull ProductIssueRecord productIssueRecord)
             throws InvalidLotQuantityException, LotNotFoundException
     {
-
         // Verificar se o lote está registado nos lotes ativos
         if (!storedLots.contains(productIssueRecord.getLot())) {
             throw new LotNotFoundException(productIssueRecord.getLot());
         }
+
+        // Validar quantidade movida
+        StorageManagerUtils.validateMovementMovedQuantity(productIssueRecord.getMovedAmount());
 
         // Subtrair quantidade movida do lote
         Lot lot = productIssueRecord.getLot();
@@ -148,6 +151,7 @@ public class StorageManager implements Serializable {
      * @param productBreakageRecord Registo de quebra de produtos de um lote
      * @throws InvalidLotQuantityException Se a quantidade do produto após subtração da quantidade movida for negativa
      * @throws LotNotFoundException Se o lote do movimento não se encontra na lista de lotes ativos.
+     * @throws InvalidMovementMovedQuantityException Se a quantidade movida for menor ou igual a 0.
      */
     public void registerProductBreakage(@NotNull ProductBreakageRecord productBreakageRecord)
             throws InvalidLotQuantityException, LotNotFoundException
@@ -157,6 +161,9 @@ public class StorageManager implements Serializable {
         if (!storedLots.contains(productBreakageRecord.getLot())) {
             throw new LotNotFoundException(productBreakageRecord.getLot());
         }
+
+        // Validar quantidade movida
+        StorageManagerUtils.validateMovementMovedQuantity(productBreakageRecord.getMovedAmount());
 
         // Subtrair quantidade movida do lote
         Lot lot = productBreakageRecord.getLot();

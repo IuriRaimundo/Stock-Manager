@@ -4,6 +4,7 @@ import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import com.stockmanager.model.storage.exceptions.InvalidLotExpirationDateException;
 import com.stockmanager.model.storage.exceptions.DuplicateLotEntryException;
+import com.stockmanager.model.storage.exceptions.InvalidMovementMovedQuantityException;
 import com.stockmanager.model.storage.exceptions.ProductNotActiveException;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,7 @@ abstract public class StorageManagerUtils {
      * @throws DuplicateLotEntryException Se o lote já estiver guardado nos storedLots
      * @throws ProductNotFoundException Se o produto do lote não estiver registado no storage manager
      * @throws ProductNotActiveException Se o produto do lote não estiver ativo
+     * @throws InvalidMovementMovedQuantityException Se a quantidade movida no registo de entrada de lote for <= 0
      */
     static void validateLotEntry(@NotNull LotEntryRecord lotEntryRecord, @NotNull LinkedList<Lot> storedLots) {
 
@@ -49,6 +51,20 @@ abstract public class StorageManagerUtils {
             throw new ProductNotActiveException(lot.getProduct());
         }
 
+        // Validar quantidade
+        validateMovementMovedQuantity(lotEntryRecord.movedAmount);
+
+    }
+
+    /**
+     * Método para validar a quantidade de produtos movida em um registo de movimento.
+     * @param movedQuantity Quantidade de produtos movida
+     * @throws InvalidMovementMovedQuantityException Se a quantidade for menor ou igual a 0.
+     */
+    static void validateMovementMovedQuantity(int movedQuantity) {
+        if (movedQuantity <= 0 ) {
+            throw new InvalidMovementMovedQuantityException(movedQuantity);
+        }
     }
 
     /**
