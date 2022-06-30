@@ -10,9 +10,9 @@ import java.util.Objects;
 abstract public class MovementRecord implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    private static final IdGenerator idGenerator = new IdGenerator("M");
+    public static final String ID_PREFIX = "M";
 
     protected final String id;
     protected final Date movementDate;
@@ -20,13 +20,15 @@ abstract public class MovementRecord implements Serializable {
     protected final int movedAmount;
 
     /**
+     * @param id Id do movimento
      * @param lot Lote do movimento
      * @param movedAmount Quantidade de produtos movida
      */
-    public MovementRecord(@NotNull Lot lot,
+    public MovementRecord(@NotNull String id,
+                          @NotNull Lot lot,
                           int movedAmount)
     {
-        this.id =           idGenerator.generateId();
+        this.id =           id;
         this.movementDate = new Date();
         this.lot =          Objects.requireNonNull(lot);
         this.movedAmount =  movedAmount;

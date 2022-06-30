@@ -31,7 +31,16 @@ public class RegisterBreakageProductFormController extends FormController implem
 
     @Override
     public void submitAction() {
-        ProductBreakageRecord productBreakageRecord = new ProductBreakageRecord(cmbLot.getValue(),spnQuantity.getValue(),cmbReason.getValue(),txtObservation.getText()); //todo
+        // Criar registo de quebra de produtos
+        ProductBreakageRecord productBreakageRecord = new ProductBreakageRecord(
+                StorageManager.getStorageManager().movementRecordIdGenerator.generateId(),
+                cmbLot.getValue(),
+                spnQuantity.getValue(),
+                cmbReason.getValue(),
+                txtObservation.getText()
+        );
+
+        // Adicionar registo ao storage manager
         StorageManager.getStorageManager().registerProductBreakage(productBreakageRecord);
     }
 

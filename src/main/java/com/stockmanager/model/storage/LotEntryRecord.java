@@ -10,8 +10,8 @@ public class LotEntryRecord extends MovementRecord implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public LotEntryRecord(@NotNull Lot lot) {
-        super(lot, lot.getQuantity());
+    public LotEntryRecord(@NotNull String id, @NotNull Lot lot) {
+        super(id, lot, lot.getQuantity());
     }
 
 }

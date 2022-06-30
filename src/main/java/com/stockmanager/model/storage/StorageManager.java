@@ -1,5 +1,6 @@
 package com.stockmanager.model.storage;
 
+import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
@@ -17,10 +18,13 @@ public class StorageManager implements Serializable {
     private static final String STORAGE_MANAGER_DATAFILE_NAME = "StorageManager.dat";
 
     // Lotes armazenados
+    public final IdGenerator lotIdGenerator;
     private final LinkedList<Lot> storedLots;
     // Histórico de lotes
     private final LinkedList<Lot> lotHistory;
+
     // Registos de entrada de lote
+    public final IdGenerator movementRecordIdGenerator;
     private final LinkedList<LotEntryRecord> lotEntryRecords;
     // Registos de saída de produtos de um lote
     private final LinkedList<ProductIssueRecord> productIssueRecords;
@@ -54,6 +58,9 @@ public class StorageManager implements Serializable {
         this.lotEntryRecords = new LinkedList<>();
         this.productIssueRecords = new LinkedList<>();
         this.productBreakageRecords = new LinkedList<>();
+
+        lotIdGenerator = new IdGenerator(Lot.ID_PREFIX);
+        movementRecordIdGenerator = new IdGenerator(MovementRecord.ID_PREFIX);
     }
 
     /**

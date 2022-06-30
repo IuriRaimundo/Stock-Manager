@@ -34,9 +34,17 @@ public class RegisterLotEntryFormController extends FormController implements In
     @Override
     public void submitAction() {
 
+        // Criar registo de entrada de lote
         Date date = new Date(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonth().getValue(), datePicker.getValue().getYear());
-        Lot lot = new Lot(cmbProduct.getValue(), date, spnQuantity.getValue());
-        LotEntryRecord lotEntryRecord = new LotEntryRecord(lot);
+        Lot lot = new Lot(
+                StorageManager.getStorageManager().lotIdGenerator.generateId(),
+                cmbProduct.getValue(), date, spnQuantity.getValue()
+        );
+        LotEntryRecord lotEntryRecord = new LotEntryRecord(
+                StorageManager.getStorageManager().lotIdGenerator.generateId(), lot
+        );
+
+        // Adicionar registo de entrada de lote ao manager.
         StorageManager.getStorageManager().registerLotEntry(lotEntryRecord);
     }
 

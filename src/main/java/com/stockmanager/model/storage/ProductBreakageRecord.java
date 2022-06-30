@@ -15,17 +15,19 @@ public class ProductBreakageRecord extends MovementRecord implements Serializabl
     private final double lossValue;
 
     /**
+     * @param id Id do movimento
      * @param brokeProductLot Lote do movimento
      * @param movedAmount Quantidade de produtos quebrados
      * @param reason Motivo da quebra
      * @param observation Observações sobre a quebra
      */
-    public ProductBreakageRecord(@NotNull Lot brokeProductLot,
+    public ProductBreakageRecord(@NotNull String id,
+                                 @NotNull Lot brokeProductLot,
                                  int movedAmount,
                                  @NotNull ProductBreakageReason reason,
                                  @NotNull String observation)
     {
-        super(brokeProductLot, movedAmount);
+        super(id, brokeProductLot, movedAmount);
         this.reason = reason;
         this.observation = observation;
         this.lossValue = calculateLoss();

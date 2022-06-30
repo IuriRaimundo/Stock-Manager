@@ -5,16 +5,14 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
-import com.stockmanager.model.common.IdGenerator;
-import com.stockmanager.model.product.exceptions.*;
 
 
 public class Product implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    private static final IdGenerator idGenerator = new IdGenerator("P");
+    public static final String ID_PREFIX = "P";
 
     private final String id;
     private final Category category;
@@ -25,6 +23,7 @@ public class Product implements Serializable {
     private boolean isActive;
 
     /**
+     * @param id Id do produto
      * @param name Nome do produto
      * @param brand Marca do produto
      * @param category Categoria do produto
@@ -32,14 +31,16 @@ public class Product implements Serializable {
      * @param productPricingUnit Undidade de formação de preço do produto
      * @param isActive Estado do produto, verdadeiro = ativo, falso = desativo
      */
-    public Product(@NotNull String name,
+    public Product(
+            @NotNull String id,
+            @NotNull String name,
             @NotNull String brand,
             @NotNull Category category,
             double price,
             @NotNull ProductPricingUnit productPricingUnit,
             boolean isActive)
     {
-        this.id =                 idGenerator.generateId();
+        this.id =                 id;
         this.brand =              Objects.requireNonNull(brand);
         this.category =           Objects.requireNonNull(category);
         this.productPricingUnit = Objects.requireNonNull(productPricingUnit);

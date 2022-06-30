@@ -1,5 +1,6 @@
 package com.stockmanager.model.product;
 
+import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import org.jetbrains.annotations.NotNull;
@@ -16,13 +17,16 @@ import java.util.HashMap;
 public class ProductManager implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public static final String PRODUCT_MANAGER_DATAFILE = "ProductManager.dat";
 
     // Categorias registadas, a chave do map é o id da categoria.
+    public final IdGenerator categoryIdGenerator;
     private final HashMap<String, Category> categories;
+
     // Produtos registados, a chave do map é o id do produto.
+    public final IdGenerator productIdGenerator;
     private final HashMap<String, Product> products;
 
     public static ManagerDataLoader<ProductManager> dataLoader = new ManagerDataLoader<>(PRODUCT_MANAGER_DATAFILE);
@@ -49,6 +53,9 @@ public class ProductManager implements Serializable {
     private ProductManager() {
         categories = new HashMap<>();
         products = new HashMap<>();
+
+        productIdGenerator = new IdGenerator(Product.ID_PREFIX);
+        categoryIdGenerator = new IdGenerator(Category.ID_PREFIX);
     }
 
     /**

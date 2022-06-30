@@ -12,18 +12,19 @@ import java.util.Objects;
 public class Category implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    private static final IdGenerator idGenerator = new IdGenerator("C");
+    public static final String ID_PREFIX = ("C");
 
     private final String id;
     private String name;
 
     /**
+     * @param id Id da categoria
      * @param name Nome da categoria
      */
-    public Category(@NotNull String name) {
-        this.id = idGenerator.generateId();
+    public Category(@NotNull String id, @NotNull String name) {
+        this.id = id;
         setName(Objects.requireNonNull(name));
     }
 

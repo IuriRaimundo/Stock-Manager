@@ -133,7 +133,13 @@ public class RegisterProductIssueFormController extends FormController implement
 
     @Override
     public void submitAction() {
-        ProductIssueRecord productIssueRecord = new ProductIssueRecord(cmbLot.getValue(), spnQuantity.getValue());
+        // Criar registo de saída de produtos
+        ProductIssueRecord productIssueRecord = new ProductIssueRecord(
+                StorageManager.getStorageManager().movementRecordIdGenerator.generateId(),
+                cmbLot.getValue(), spnQuantity.getValue()
+        );
+
+        // Adicionar registo ao StorageManager
         StorageManager.getStorageManager().registerProductIssue(productIssueRecord);
     }
 }

@@ -137,7 +137,9 @@ public class AddProductFormController extends FormController implements Initiali
         }
 
         // Criar objeto produto
-        Product newProduct = new Product(nameTextField.getText(),
+        Product newProduct = new Product(
+                ProductManager.getProductManager().productIdGenerator.generateId(),
+                nameTextField.getText(),
                 brandTextField.getText(),
                 categoryComboBox.getValue(),
                 productPrice,

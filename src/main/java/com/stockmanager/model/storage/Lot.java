@@ -13,25 +13,26 @@ import com.stockmanager.model.storage.exceptions.*;
 public class Lot implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    private static final IdGenerator idGenerator = new IdGenerator("L");
+    public static final String ID_PREFIX = "L";
 
     private final String id;
     private final Product product;
     private final Date expirationDate;
     private int quantity;
 
-
     /**
+     * @param id Id do lote
      * @param product Produto do lote
      * @param expirationDate Data de validade do lote
      * @param quantity Quantidade de produtos no lote
      */
-    public Lot(@NotNull Product product,
+    public Lot(@NotNull String id,
+               @NotNull Product product,
                @NotNull Date expirationDate,
                int quantity) {
-        this.id =             idGenerator.generateId();
+        this.id =             id;
         this.product =        Objects.requireNonNull(product);
         this.expirationDate = Objects.requireNonNull(expirationDate);
         setQuantity(quantity);

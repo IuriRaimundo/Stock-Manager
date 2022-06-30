@@ -13,13 +13,15 @@ public class ProductIssueRecord extends MovementRecord implements Serializable {
     private final double gainValue;
 
     /**
+     * @param id Id do movimento
      * @param productIssuedLot Lote do movimento
      * @param movedAmount Quantidade de produtos movidos
      */
-    public ProductIssueRecord(@NotNull Lot productIssuedLot,
+    public ProductIssueRecord(@NotNull String id,
+                              @NotNull Lot productIssuedLot,
                               int movedAmount)
     {
-        super(productIssuedLot, movedAmount );
+        super(id, productIssuedLot, movedAmount);
         this.gainValue = calculateGain();
     }
 
