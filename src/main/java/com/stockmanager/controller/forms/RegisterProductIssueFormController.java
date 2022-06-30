@@ -5,6 +5,7 @@ import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.ProductManagerUtils;
 import com.stockmanager.model.storage.Lot;
+import com.stockmanager.model.storage.ProductIssueRecord;
 import com.stockmanager.model.storage.StorageManager;
 import com.stockmanager.model.storage.StorageManagerUtils;
 import javafx.collections.FXCollections;
@@ -132,6 +133,7 @@ public class RegisterProductIssueFormController extends FormController implement
 
     @Override
     public void submitAction() {
-
+        ProductIssueRecord productIssueRecord = new ProductIssueRecord(cmbLot.getValue(), spnQuantity.getValue());
+        StorageManager.getStorageManager().registerProductIssue(productIssueRecord);
     }
 }
