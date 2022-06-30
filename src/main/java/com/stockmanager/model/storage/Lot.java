@@ -86,4 +86,9 @@ public class Lot implements Serializable {
         int newQuantity = this.quantity - quantityToSubtract;
         setQuantity(newQuantity);
     }
+
+    @Override
+    public String toString() {
+        return "(" + id + ") " + product.getName() + ", " + product.getBrand();
+    }
 }

@@ -5,6 +5,7 @@ import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import com.stockmanager.model.storage.exceptions.InvalidLotExpirationDateException;
 import com.stockmanager.model.storage.exceptions.DuplicateLotEntryException;
 import com.stockmanager.model.storage.exceptions.ProductNotActiveException;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -12,6 +13,7 @@ import java.util.LinkedList;
 abstract public class StorageManagerUtils {
 
     public static StorageManager instance = StorageManager.getStorageManager();
+
     /**
      * Método para validar a entrada de um lote
      * @param lotEntryRecord Registo de entrada do lote
@@ -21,7 +23,7 @@ abstract public class StorageManagerUtils {
      * @throws ProductNotFoundException Se o produto do lote não estiver registado no storage manager
      * @throws ProductNotActiveException Se o produto do lote não estiver ativo
      */
-    static void validateLotEntry(LotEntryRecord lotEntryRecord, LinkedList<Lot> storedLots) {
+    static void validateLotEntry(@NotNull LotEntryRecord lotEntryRecord, @NotNull LinkedList<Lot> storedLots) {
 
         Lot lot = lotEntryRecord.getLot();
 
@@ -50,12 +52,12 @@ abstract public class StorageManagerUtils {
     }
 
     /**
-     * Método para obter um stored lot através do id.
+     * Método para obter um lote armazenado através do id.
      * Tempo linear O(n).
      * @param id Id a procurar
      * @return Stored lot ou null se não for encontrado
      */
-    public static Lot getStoredLotById(String id) {
+    public static Lot getStoredLotById(@NotNull String id) {
         for (Lot storedLot : instance.getStoredLots()) {
             if (storedLot.getId().equals(id)) {
                 return storedLot;
@@ -63,5 +65,29 @@ abstract public class StorageManagerUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Método para procurar um lote armazenado através do resultado do toString() de um lote.
+     * Utiliza a função de procura getStoredLotById, logo executa em tempo linear O(n).
+     * @param lotString String a ser procurada
+     * @return Lote armazenado ou null se não encontrar
+     */
+    public static Lot getStoredLotByLotString(@NotNull String lotString) {
+        // Obter id através da lotString
+        StringBuilder id = new StringBuilder();
+        for (char c : lotString.toCharArray()) {
+            if (c == '(') {
+                continue;
+            }
+
+            if (c == ')') {
+                break;
+            }
+
+            id.append(c);
+        }
+
+        return getStoredLotById(id.toString());
     }
 }
