@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 abstract public class StorageManagerUtils {
 
+    public static StorageManager instance = StorageManager.getStorageManager();
     /**
      * Método para validar a entrada de um lote
      * @param lotEntryRecord Registo de entrada do lote
@@ -46,5 +47,21 @@ abstract public class StorageManagerUtils {
             throw new ProductNotActiveException(lot.getProduct());
         }
 
+    }
+
+    /**
+     * Método para obter um stored lot através do id.
+     * Tempo linear O(n).
+     * @param id Id a procurar
+     * @return Stored lot ou null se não for encontrado
+     */
+    public static Lot getStoredLotById(String id) {
+        for (Lot storedLot : instance.getStoredLots()) {
+            if (storedLot.getId().equals(id)) {
+                return storedLot;
+            }
+        }
+
+        return null;
     }
 }
