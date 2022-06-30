@@ -1,5 +1,6 @@
 package com.stockmanager.view.components;
 
+import com.stockmanager.controller.components.TopBarController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 
 public class TopBar extends HBox {
 
+    public TopBarController controller;
 
     public TopBar() {
 
@@ -15,6 +17,7 @@ public class TopBar extends HBox {
 
         try {
             fxmlLoader.load();
+            controller = fxmlLoader.getController();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }

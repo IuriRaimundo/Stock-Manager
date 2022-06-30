@@ -72,15 +72,8 @@ public class Product implements Serializable {
 
     /**
      * @param name Novo nome do produto
-     * @throws InvalidProductNameException Se o nome passado for inválido.
      */
     void setName(@NotNull String name) {
-        // Validar comprimento do nome
-        int nameLen = name.length();
-        if (nameLen < 2 || nameLen > 20) {
-            throw new InvalidProductNameException(name);
-        }
-
         this.name = name;
     }
 

@@ -6,6 +6,7 @@ import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.ProductPricingUnit;
 import com.stockmanager.model.storage.StorageManager;
+import com.stockmanager.view.components.MainBorderPane;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -75,19 +76,18 @@ public class ProductScreenController implements Initializable {
 
 
     public void addProductButton(ActionEvent event){
+
         Node source = (Node) event.getSource();
         Scene scene = source.getScene();
         Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
+        MainBorderPane mainBorderPane = (MainBorderPane) scene.lookup("#mainBorderPane");
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/addProductForm.fxml"));
-            if (topBarLabel != null) {
-                topBarLabel.setText("Adicionar Produto");
-            }
-            mainBorderPane.setCenter(fxmlLoader.load());
+            topBarLabel.setText("Adicionar Produto");
+            mainBorderPane.getController().openForm("AddProductForm");
         } catch (Exception e) {
             e.printStackTrace();
+            mainBorderPane.getController().showError(e);
         }
 
     }

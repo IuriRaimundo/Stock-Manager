@@ -9,6 +9,8 @@ module com.stockmanager {
     opens com.stockmanager.view.components to javafx.fxml;
     opens com.stockmanager.controller.components to javafx.fxml;
     opens com.stockmanager.controller.screens to javafx.fxml;
+    opens com.stockmanager.controller.forms to javafx.fxml;
+    opens com.stockmanager.view.forms to javafx.fxml;
 
 
     exports com.stockmanager;

@@ -163,6 +163,8 @@ public class ProductManager extends Manager implements Serializable {
     /**
      * Função para validar um produto completo
      * @throws DuplicateKeyException Se o produto já se encontrar registado.
+     * @throws InvalidProductNameException Se o nome de produto for inválido.
+     * @throws InvalidProductBrandException Se a marca de produto for inválida.
      */
     public void validateProduct(Product product) {
 
@@ -176,6 +178,16 @@ public class ProductManager extends Manager implements Serializable {
 
         // Validar preço
         validateProductPrice(product.getPrice());
+
+        // Validar nome
+        if (product.getName().length() < 2 || product.getName().length() > 20) {
+            throw new InvalidProductNameException(product.getName());
+        }
+
+        // Validar marca
+        if (product.getBrand().length() < 2 || product.getBrand().length() > 20) {
+            throw new InvalidProductBrandException(product.getBrand());
+        }
     }
 
     /**

@@ -11,7 +11,7 @@
     fx:controller="com.stockmanager.controller.MainBorderPaneController"
     >
     <top>
-        <TopBar/>
+        <TopBar fx:id="topBar"/>
     </top>
     <left>
         <Menu/>
