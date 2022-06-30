@@ -134,6 +134,32 @@ public class LotScreenController implements Initializable {
         }
     }
 
+    @FXML
+    private void searchButtonActionHandler(ActionEvent event) {
+
+        String needle = searchTextField.getText();
+
+        if (needle.length() == 0) {
+            lotTable.setItems(lotObservableList);
+            return;
+        }
+
+        // Filtrar lista por id de lote, id de produto, ou por nome do produto
+        LinkedList<Lot> filteredLotLinkedList = lotLinkedList.stream()
+                .filter(lot -> lot.getId().equals(needle) ||
+                        lot.getProduct().getId().equals(needle) ||
+                        lot.getProduct().getName().toLowerCase(Locale.ROOT)
+                                .contains(needle.toLowerCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        // Atualizar tabela
+        ObservableList<Lot> filteredLotObservableList = FXCollections.observableArrayList(filteredLotLinkedList.stream().toList());
+
+        lotTable.setItems(filteredLotObservableList);
+    }
+
+
+
 
 }
 
