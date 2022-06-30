@@ -1,5 +1,10 @@
 package com.stockmanager.model.product;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.LinkedList;
+import java.util.stream.Collectors;
+
 /**
  * Classe de utilidade para o ProductManager
  */
@@ -27,7 +32,7 @@ abstract public class ProductManagerUtils {
      * @param productString String a ser procurada
      * @return Produto ou null se não encontrar
      */
-    public static Product getProductByProductString(String productString) {
+    public static Product getProductByProductString(@NotNull String productString) {
 
         // Obter id através da productString
         StringBuilder id = new StringBuilder();
@@ -44,5 +49,16 @@ abstract public class ProductManagerUtils {
         }
 
         return instance.getProducts().get(id.toString());
+    }
+
+    /**
+     * Método para obter uma lista de produtos de uma determinada categoria
+     * @param category Categoria a procurar
+     * @return Lista de produtos com a categoria passada por parametro
+     */
+    public static LinkedList<Product> getProductsByCategory(@NotNull Category category) {
+        return instance.getProducts().values().stream()
+                .filter(p -> p.getCategory() == category)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }
