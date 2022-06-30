@@ -118,4 +118,9 @@ public class Product implements Serializable {
     void setActive(boolean active) {
         isActive = active;
     }
+
+    @Override
+    public String toString() {
+        return "(" + id + ") " + name + ", " + brand;
+    }
 }
