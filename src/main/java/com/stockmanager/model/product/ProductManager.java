@@ -1,6 +1,6 @@
 package com.stockmanager.model.product;
 
-import com.stockmanager.model.common.Manager;
+import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.product.exceptions.ProductNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,11 +8,12 @@ import com.stockmanager.model.product.exceptions.*;
 import com.stockmanager.model.utils.HashMapUtils;
 import com.stockmanager.model.utils.exceptions.*;
 
+import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class ProductManager extends Manager implements Serializable {
+public class ProductManager implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -24,14 +25,28 @@ public class ProductManager extends Manager implements Serializable {
     // Produtos registados, a chave do map é o id do produto.
     private final HashMap<String, Product> products;
 
-    public static ProductManager instance = new ProductManager();
+    public static ManagerDataLoader<ProductManager> dataLoader = new ManagerDataLoader<>(PRODUCT_MANAGER_DATAFILE);
+
+    private static ProductManager instance;
+
+    static {
+        try {
+            instance = dataLoader.initialize();
+
+            if (instance == null) {
+                instance = new ProductManager();
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static ProductManager getProductManager() {
         return instance;
     }
 
     private ProductManager() {
-        super(PRODUCT_MANAGER_DATAFILE);
         categories = new HashMap<>();
         products = new HashMap<>();
     }

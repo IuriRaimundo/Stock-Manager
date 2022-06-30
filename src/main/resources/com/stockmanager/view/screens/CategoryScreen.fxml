@@ -26,7 +26,7 @@
                        styleClass="searchBar"
                        promptText="Pesquisar por id ou nome"
             />
-            <Button fx:id="searchButton"
+            <Button onAction="#searchButtonActionHandler"
                     GridPane.rowIndex="0" GridPane.columnIndex="1"
                     defaultButton="true"
                     styleClass="darkButton" text="Pesquisar"/>
@@ -52,7 +52,7 @@
         <padding>
             <Insets topRightBottomLeft="20" />
         </padding>
-        <TableView fx:id="toCategory" styleClass="mainTable">
+        <TableView fx:id="categoryTableView" styleClass="mainTable">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>

@@ -2,18 +2,17 @@ package com.stockmanager.model.common;
 
 import java.io.*;
 
-public class DataManager<ManagerClass extends Manager> {
-
-    private ManagerClass instance;
+public class ManagerDataLoader<ManagerClass> {
 
     private final String USER_HOME = System.getProperty("user.home");
     private String APP_HOME = USER_HOME + "\\StockManager";
     private final String DATAFILE_PATH;
+    private final String DATAFILE_NAME;
 
 
-    public DataManager(ManagerClass instance) {
-        DATAFILE_PATH = APP_HOME + "\\datafiles\\" + instance.DATAFILE_NAME;
-        this.instance = instance;
+    public ManagerDataLoader(String datafileName) {
+        DATAFILE_NAME = datafileName;
+        DATAFILE_PATH = APP_HOME + "\\datafiles\\" + DATAFILE_NAME;
     }
 
     /**
@@ -22,7 +21,9 @@ public class DataManager<ManagerClass extends Manager> {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void initialize() throws IOException, ClassNotFoundException {
+    public ManagerClass initialize() throws IOException, ClassNotFoundException {
+        ManagerClass instance;
+
         FileInputStream fis;
         ObjectInputStream in = null;
         try {
@@ -31,17 +32,16 @@ public class DataManager<ManagerClass extends Manager> {
 
             // Se o datafile não existir não vale a pena ler os dados, então devolver.
             if (!df.exists()) {
-                System.out.println(instance.getClass().getSimpleName() + " datafile doens't exist. No data loaded.");
-                return;
+                System.out.println(DATAFILE_NAME + " datafile doens't exist. No data loaded.");
+                return null;
             } else {
-                System.out.println("Loading " + instance.getClass().getSimpleName() + " datafile...");
+                System.out.println("Loading " + DATAFILE_NAME + " datafile...");
             }
 
             // Ler instância do datafile
             fis = new FileInputStream(df);
             in = new ObjectInputStream(fis);
             instance = (ManagerClass) in.readObject();
-
             System.out.println(instance.getClass().getSimpleName() + " data loaded.");
 
         } finally {
@@ -50,13 +50,15 @@ public class DataManager<ManagerClass extends Manager> {
                 in.close();
             }
         }
+
+        return instance;
     }
 
     /**
      * Método para armazenar a instância do manager no datafile.
      * @throws IOException
      */
-    public void persist() throws IOException {
+    public void persist(ManagerClass instance) throws IOException {
         FileOutputStream fos;
         ObjectOutputStream out = null;
 

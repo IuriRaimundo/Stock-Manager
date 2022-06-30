@@ -1,14 +1,15 @@
 package com.stockmanager.model.storage;
 
-import com.stockmanager.model.common.Manager;
+import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class StorageManager extends Manager implements Serializable {
+public class StorageManager implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -26,14 +27,28 @@ public class StorageManager extends Manager implements Serializable {
     // Registos de quebra de produtos de um lote
     private final LinkedList<ProductBreakageRecord> productBreakageRecords;
 
-    private static StorageManager instance = new StorageManager();
+    public static ManagerDataLoader<StorageManager> dataLoader = new ManagerDataLoader<>(STORAGE_MANAGER_DATAFILE_NAME);
+
+    private static StorageManager instance;
+
+    static {
+        try {
+            instance = dataLoader.initialize();
+
+            if (instance == null) {
+                instance = new StorageManager();
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static StorageManager getStorageManager() {
         return instance;
     }
 
     private StorageManager() {
-        super(STORAGE_MANAGER_DATAFILE_NAME);
         this.storedLots = new LinkedList<>();
         this.lotHistory = new LinkedList<>();
         this.lotEntryRecords = new LinkedList<>();

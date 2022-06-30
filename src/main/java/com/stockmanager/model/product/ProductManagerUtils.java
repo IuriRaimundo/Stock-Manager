@@ -69,4 +69,13 @@ abstract public class ProductManagerUtils {
                 .filter(p -> p.getCategory() == category)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
+
+
+    /**
+     * Método para procurar uma categoria pelo id, em tempo constante O(1).
+     * @param id Id a ser procurado
+     */
+    public static Category getCategoryByID(String id) {
+        return instance.getCategories().get(id);
+    }
 }

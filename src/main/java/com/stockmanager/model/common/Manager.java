@@ -16,4 +16,7 @@ public abstract class Manager implements Serializable {
         this.DATAFILE_NAME = DATAFILE_NAME;
 
     }
+
+    public static void setInstance(Manager instance) {}
+
 }
