@@ -13,21 +13,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 
 public class LotScreenController implements Initializable {
+
     @FXML
     private TableView<Lot> lotTable;
     @FXML
@@ -39,9 +38,17 @@ public class LotScreenController implements Initializable {
     @FXML
     private TableColumn<Lot, String> toDate;
 
+    @FXML
+    private TextField searchTextField;
+
+    private LinkedList<Lot> lotLinkedList;
+    private ObservableList<Lot> lotObservableList;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         toID.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getId()));
+
+        // Formatar célula de produto neste formato: (PXX) XXXXX
         toProduct.setCellValueFactory(p -> {
             Product product = p.getValue().getProduct();
             String output = "(" + product.getId() + ") " + product.getName();
@@ -49,9 +56,12 @@ public class LotScreenController implements Initializable {
             return new SimpleStringProperty(output);
 
         });
+
         toQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
         toDate.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getExpirationDate().toString()));
 
+        // Modificar estilo da célula da data de expiração
         toDate.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -75,8 +85,11 @@ public class LotScreenController implements Initializable {
 
                     long daysBetweenExpDateAndNow = TimeUnit.MILLISECONDS.toDays(expDateMs - nowInMilisecs);
 
+                    // Se o período entre a data de expiração e a data atual for menor de 30 dias destacar célula.
                     if (daysBetweenExpDateAndNow < 30) {
                         setStyle("-fx-text-fill: #C69835");
+                    } else {
+                        setStyle("-fx-text-fill: #000000");
                     }
 
                     setText(item);
@@ -86,12 +99,18 @@ public class LotScreenController implements Initializable {
         });
 
 
-        ObservableList<Lot> lotList =
-                FXCollections.observableArrayList(StorageManager.getStorageManager().getStoredLots().stream().toList());
-        lotTable.setItems(lotList);
+        // Obter lotes e atualizar tabela
+        lotLinkedList = StorageManager.getStorageManager().getStoredLots();
+
+        // Converter lista para uma observable list
+        lotObservableList =
+                FXCollections.observableArrayList(lotLinkedList.stream().toList());
+
+        lotTable.setItems(lotObservableList);
     }
 
-    public void registerEntryStockButton(ActionEvent event){
+    @FXML
+    private void registerEntryStockButton(ActionEvent event){
         Node source = (Node) event.getSource();
 
         Scene scene = source.getScene();
@@ -113,7 +132,8 @@ public class LotScreenController implements Initializable {
 
     }
 
-    public void registerExitStockButton(ActionEvent event){
+    @FXML
+    private void registerExitStockButton(ActionEvent event){
         Node source = (Node) event.getSource();
 
         Scene scene = source.getScene();
@@ -136,7 +156,8 @@ public class LotScreenController implements Initializable {
 
     }
 
-    public void registerBrokenStockButton(ActionEvent actionEvent) {
+    @FXML
+    private void registerBrokenStockButton(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
 
         Scene scene = source.getScene();
@@ -156,6 +177,32 @@ public class LotScreenController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void searchButtonActionHandler(ActionEvent event) {
+
+        String needle = searchTextField.getText();
+
+        if (needle.length() == 0) {
+            lotTable.setItems(lotObservableList);
+            return;
+        }
+
+        // Filtrar lista por id de lote, id de produto, ou por nome do produto
+        LinkedList<Lot> filteredLotLinkedList = lotLinkedList.stream()
+                .filter(lot -> lot.getId().equals(needle) ||
+                        lot.getProduct().getId().equals(needle) ||
+                        lot.getProduct().getName().toLowerCase(Locale.ROOT)
+                                .contains(needle.toLowerCase(Locale.ROOT)))
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        // Atualizar tabela
+        ObservableList<Lot> filteredLotObservableList = FXCollections.observableArrayList(filteredLotLinkedList.stream().toList());
+
+        lotTable.setItems(filteredLotObservableList);
+    }
+
+
 
 
 }

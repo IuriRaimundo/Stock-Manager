@@ -31,6 +31,7 @@ public class AddProductFormController extends FormController implements Initiali
     private CheckBox activeCheckbox;
 
 
+
     public AddProductFormController() {
         super("Adicionar Produto", "ProductScreen");
     }

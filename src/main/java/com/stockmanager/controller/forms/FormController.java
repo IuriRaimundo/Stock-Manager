@@ -1,5 +1,7 @@
 package com.stockmanager.controller.forms;
 
+import com.stockmanager.model.product.Product;
+import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.view.components.MainBorderPane;
 import com.stockmanager.view.forms.exceptions.UnfilledFormException;
 import javafx.event.ActionEvent;

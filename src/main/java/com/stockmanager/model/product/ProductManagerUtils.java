@@ -13,7 +13,7 @@ abstract public class ProductManagerUtils {
     public static ProductManager instance = ProductManager.getProductManager();
 
     /**
-     * Método para procurar uma categoria pelo nome
+     * Método para procurar uma categoria pelo nome, em tempo linear O(n).
      * @param name Nome a ser procurado
      * @return Categoria ou null se não encontrar
      */
@@ -28,12 +28,19 @@ abstract public class ProductManagerUtils {
     }
 
     /**
-     * Método para procurar um produto através do resultado do toString() de um produto
+     * Método para procurar um produto pelo id, em tempo constante O(1).
+     * @param id Id a ser procurado
+     */
+    public static Product getProductById(String id) {
+        return instance.getProducts().get(id);
+    }
+
+    /**
+     * Método para procurar um produto através do resultado do toString() de um produto, em tempo linear O(n)
      * @param productString String a ser procurada
      * @return Produto ou null se não encontrar
      */
     public static Product getProductByProductString(@NotNull String productString) {
-
         // Obter id através da productString
         StringBuilder id = new StringBuilder();
         for (char c : productString.toCharArray()) {
@@ -52,7 +59,8 @@ abstract public class ProductManagerUtils {
     }
 
     /**
-     * Método para obter uma lista de produtos de uma determinada categoria
+     * Método para obter uma lista de produtos de uma determinada categoria.
+     * Tempo linear O(n).
      * @param category Categoria a procurar
      * @return Lista de produtos com a categoria passada por parametro
      */
