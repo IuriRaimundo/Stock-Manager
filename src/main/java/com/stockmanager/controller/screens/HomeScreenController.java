@@ -48,7 +48,7 @@ public class HomeScreenController implements Initializable {
         int totalEntryProduct = (int) calculateTotalEntryProduct();
         totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct));
 
-        totalEntryProductCard.getController().updateTitleLabel("Entrada de produutos " + formatDate.format(LocalDateTime.now()));
+        totalEntryProductCard.getController().updateTitleLabel("Entrada de produtos " + formatDate.format(LocalDateTime.now()));
     }
 
     /**
