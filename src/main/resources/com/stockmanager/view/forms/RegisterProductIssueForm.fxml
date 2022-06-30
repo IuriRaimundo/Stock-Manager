@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="414.0" prefWidth="702.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.stockmanager.controller.forms.RegisterProductIssueFormController">
+    <padding>
+        <Insets topRightBottomLeft="40" />
+    </padding>
+    <children>
+        <Label prefHeight="38.0" prefWidth="222.0" text="Categoria">
+            <font>
+                <Font name="Century Gothic" size="17.0" />
+            </font>
+        </Label>
+
+        <ComboBox fx:id="cmbCategory" editable="true" prefHeight="25.0" prefWidth="164.0">
+
+        </ComboBox>
+
+        <Label prefHeight="38.0" prefWidth="222.0" text="Lote">
+            <font>
+                <Font name="Century Gothic" size="17.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="cmbLot" editable="true" prefHeight="25.0" prefWidth="164.0">
+
+        </ComboBox>
+
+        <Label prefHeight="38.0" prefWidth="222.0" text="Quantidade">
+            <font>
+                <Font name="Century Gothic" size="17.0" />
+            </font>
+        </Label>
+
+        <Spinner fx:id="spnQuantity" editable="true" max="1000" min="1" prefHeight="25.0" prefWidth="237.0" />
+
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding>
+                <Insets top="20" />
+            </padding>
+            <children>
+                <Button mnemonicParsing="false" onAction="#cancelHandler" prefHeight="49.0" prefWidth="130.0" styleClass="lightButton" stylesheets="@../css/styles.css" text="Cancelar">
+                    <font>
+                        <Font name="Century Gothic" size="15.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#confirmHandler" prefHeight="49.0" prefWidth="130.0" styleClass="darkButton" stylesheets="@../css/styles.css" text="Confirmar">
+                    <font>
+                        <Font name="Century Gothic" size="15.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+
+    </children>
+</VBox>

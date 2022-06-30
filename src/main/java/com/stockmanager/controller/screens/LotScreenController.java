@@ -85,11 +85,8 @@ public class LotScreenController implements Initializable {
 
                     long daysBetweenExpDateAndNow = TimeUnit.MILLISECONDS.toDays(expDateMs - nowInMilisecs);
 
-                    // Se o período entre a data de expiração e a data atual for menor de 30 dias destacar célula.
                     if (daysBetweenExpDateAndNow < 30) {
                         setStyle("-fx-text-fill: #C69835");
-                    } else {
-                        setStyle("-fx-text-fill: #000000");
                     }
 
                     setText(item);
@@ -109,100 +106,33 @@ public class LotScreenController implements Initializable {
         lotTable.setItems(lotObservableList);
     }
 
-    @FXML
-    private void registerEntryStockButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        MainBorderPane mainBorderPane = (MainBorderPane) scene.lookup("#mainBorderPane");
-
+    public void registerLotEntryBtn(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("com/prototipo/prototipomsi/screens/RegistarEntradaDeLote.fxml"));
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Entrada de Lote");
-            }
-            mainBorderPane.setCenter(fxmlLoader.load());
+            MainBorderPane.controller.openForm("RegisterLotEntryForm");
         } catch (Exception e) {
-            e.printStackTrace();
-            mainBorderPane.getController().showError(e);
-        }
-
-    }
-
-    @FXML
-    private void registerExitStockButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/RegistarSaidaDeProdutos.fxml"));
-            mainBorderPane.setCenter(fxmlLoader.load());
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Saída de Produtos");
-            }
-
-        } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
 
     }
 
-    @FXML
-    private void registerBrokenStockButton(ActionEvent actionEvent) {
-        Node source = (Node) actionEvent.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
+    public void registerProductIssueBtn(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/RegistarQuebraDeProduto.fxml"));
-            mainBorderPane.setCenter(fxmlLoader.load());
-            if (topBarLabel != null) {
-                topBarLabel.setText("Registar Quebra de Produto");
-            }
-
+            MainBorderPane.controller.openForm("RegisterProductIssueForm");
         } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private void searchButtonActionHandler(ActionEvent event) {
-
-        String needle = searchTextField.getText();
-
-        if (needle.length() == 0) {
-            lotTable.setItems(lotObservableList);
-            return;
+    public void registerProductBreakageBtn(ActionEvent actionEvent) {
+        try {
+            MainBorderPane.controller.openForm("RegisterBreakageProductForm");
+        } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
+            e.printStackTrace();
         }
-
-        // Filtrar lista por id de lote, id de produto, ou por nome do produto
-        LinkedList<Lot> filteredLotLinkedList = lotLinkedList.stream()
-                .filter(lot -> lot.getId().equals(needle) ||
-                        lot.getProduct().getId().equals(needle) ||
-                        lot.getProduct().getName().toLowerCase(Locale.ROOT)
-                                .contains(needle.toLowerCase(Locale.ROOT)))
-                .collect(Collectors.toCollection(LinkedList::new));
-
-        // Atualizar tabela
-        ObservableList<Lot> filteredLotObservableList = FXCollections.observableArrayList(filteredLotLinkedList.stream().toList());
-
-        lotTable.setItems(filteredLotObservableList);
     }
-
-
 
 
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
+<VBox prefHeight="502.0" prefWidth="755.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.stockmanager.controller.forms.RegisterBreakageProductFormController">
+    <padding>
+        <Insets topRightBottomLeft="40"/>
+    </padding>
+    <children>
+        <Label text="Categoria">
+            <font>
+                <Font name="Century Gothic" size="16.0"/>
+            </font>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="5.0" top="10.0"/>
+            </VBox.margin>
+        </Label>
+        <ComboBox fx:id="cmbCategory" editable="true" prefWidth="150.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="5.0" top="10.0"/>
+            </VBox.margin>
+        </ComboBox>
+        <Label text="Lote">
+            <font>
+                <Font name="Century Gothic" size="16.0"/>
+            </font>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+        </Label>
+        <ComboBox fx:id="cmbLot" editable="true" prefWidth="150.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="5.0" top="10.0"/>
+            </VBox.margin>
+        </ComboBox>
+        <Label prefHeight="38.0" prefWidth="222.0" text="Quantidade">
+            <font>
+                <Font name="Century Gothic" size="17.0" />
+            </font>
+        </Label>
+
+        <Spinner fx:id="spnQuantity" editable="true" max="1000" min="0" prefWidth="150.0" />
+        <Label text="Motivo">
+            <font>
+                <Font size="16.0"/>
+            </font>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="5.0" top="10.0"/>
+            </VBox.margin>
+        </Label>
+        <ComboBox fx:id="txtObservation" editable="true" prefWidth="150.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+        </ComboBox>
+        <Label text="Observação">
+            <font>
+                <Font name="Century Gothic" size="16.0"/>
+            </font>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="5.0" top="10.0"/>
+            </VBox.margin>
+        </Label>
+        <TextField prefHeight="140.0" prefWidth="332.0"/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="20"/>
+            </padding>
+            <children>
+                <Button onAction="#cancelHandler"
+                        styleClass="lightButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0"
+                        stylesheets="@../css/styles.css" text="Cancelar">
+                    <font>
+                        <Font name="Century Gothic" size="15.0"/>
+                    </font>
+                </Button>
+                <Button onAction="#confirmHandler"
+                        styleClass="darkButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="130.0"
+                        stylesheets="@../css/styles.css" text="Confirmar">
+                    <font>
+                        <Font name="Century Gothic" size="15.0"/>
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </children>
+</VBox>
+
