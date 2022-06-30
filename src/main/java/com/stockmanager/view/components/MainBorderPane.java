@@ -21,7 +21,6 @@ public class MainBorderPane extends BorderPane {
             throw new RuntimeException(exception);
         }
     }
-
     public MainBorderPaneController getController() {
         return controller;
     }
