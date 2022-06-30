@@ -87,12 +87,12 @@ public class RegisterProductIssueFormController extends FormController implement
             }
         });
 
-        // Popular combo box de produtos
+        // Popular combo box de lotes
         LinkedList<Lot> lotLinkedList = new LinkedList<>(StorageManager.getStorageManager().getStoredLots());
         ObservableList<Lot> observablelotList = FXCollections.observableArrayList(lotLinkedList);
         cmbLot.setItems(observablelotList);
 
-        // Formatar texto da combo box de  produtos
+        // Formatar texto da combo box de lotes
         Callback<ListView<Lot>, ListCell<Lot>> lotComboBoxCellFactory = new Callback<>() {
             @Override
             public ListCell<Lot> call(ListView<Lot> l) {

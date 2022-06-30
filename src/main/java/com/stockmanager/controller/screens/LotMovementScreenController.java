@@ -59,7 +59,12 @@ public class LotMovementScreenController implements Initializable {
             return new SimpleStringProperty(type);
         });
 
-        toLot.setCellValueFactory(new PropertyValueFactory<>("id"));
+        toLot.setCellValueFactory(p -> {
+            String id = p.getValue().getLot().getId();
+            return new SimpleStringProperty(id);
+
+        });
+
         toProduct.setCellValueFactory(p -> {
             Product product = p.getValue().getLot().getProduct();
             String output = "(" + product.getId() + ") " + product.getName();
