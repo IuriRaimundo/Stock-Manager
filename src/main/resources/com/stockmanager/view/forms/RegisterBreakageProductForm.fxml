@@ -84,7 +84,7 @@
                 <Insets bottom="5.0" top="10.0" />
             </VBox.margin>
         </Label>
-        <TextField fx:id="txtObservation" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="332.0" promptText="Insira aqui a observação..." />
+        <TextField fx:id="txtObservation" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="332.0" promptText="Insira aqui a observação..." VBox.vgrow="NEVER" />
 
         <HBox alignment="CENTER_RIGHT" spacing="10">
             <padding>

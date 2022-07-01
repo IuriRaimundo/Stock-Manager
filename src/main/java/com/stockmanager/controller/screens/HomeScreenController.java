@@ -37,6 +37,11 @@ public class HomeScreenController implements Initializable {
         int totalLot = (int) calculateTotalLot();
         totalLotCard.getController().updateBodyLabel(String.valueOf(totalLot));
 
+        int totalEntryProduct = (int) calculateTotalEntryProduct();
+        totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct));
+
+        totalEntryProductCard.getController().updateTitleLabel("Entrada de produtos " + formatDate.format(LocalDateTime.now()));
+
         int totalProductIssueRecord = (int) calculateTotalProductIssueRecord();
         totalExitProductCard.getController().updateBodyLabel(String.valueOf(totalProductIssueRecord));
 
@@ -45,10 +50,6 @@ public class HomeScreenController implements Initializable {
         double totalProductBreakageLoss = calculateTotalProductBreakageLoss();
         totalProductBreakageLossCard.getController().updateBodyLabel(decimalFormat.format(totalProductBreakageLoss) + "€");
 
-        int totalEntryProduct = (int) calculateTotalEntryProduct();
-        totalEntryProductCard.getController().updateBodyLabel(String.valueOf(totalEntryProduct));
-
-        totalEntryProductCard.getController().updateTitleLabel("Entrada de produtos " + formatDate.format(LocalDateTime.now()));
     }
 
     /**
@@ -72,7 +73,7 @@ public class HomeScreenController implements Initializable {
         double lossValue = 0;
 
         for (ProductBreakageRecord r : StorageManager.getStorageManager().getProductBreakageRecords()) {
-            lossValue += r.getLossValue();
+            lossValue += r.getMovedAmount();
         }
 
         return lossValue;
@@ -83,11 +84,12 @@ public class HomeScreenController implements Initializable {
      * @return Valor total da saída de produtos
      */
     private double calculateTotalProductIssueRecord() {
-        int productIssueRecordValue;
-        LinkedList<ProductIssueRecord> list = StorageManager.getStorageManager().getProductIssueRecords();
-        productIssueRecordValue = list.size();
+        double gainValue = 0;
 
-        return productIssueRecordValue;
+        for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
+            gainValue += r.getMovedAmount();
+        }
+        return gainValue;
     }
     /**
      * Método para calcular o total de lotes da lista de lotes
@@ -107,8 +109,8 @@ public class HomeScreenController implements Initializable {
     private double calculateTotalEntryProduct (){
         double gainValue = 0;
 
-        for (ProductIssueRecord r : StorageManager.getStorageManager().getProductIssueRecords()) {
-            gainValue += r.getGainValue();
+        for (LotEntryRecord r : StorageManager.getStorageManager().getLotEntryRecords()) {
+            gainValue += r.getMovedAmount();
         }
         return gainValue;
     }
