@@ -59,10 +59,15 @@
     -fx-pref-height: 0;
 }
 
-.combo-box .list-cell:hover, .combo-box .list-cell:selected, .combo-box .list-cell:focused {
+.combo-box .list-cell:hover {
     -fx-background-color: -primaryColor;
 }
-
+.combo-box .list-cell:selected{
+    -fx-background-color: transparent;
+}
+.combo-box .list-cell:row-selection{
+    -fx-background-color: -primaryColor;
+}
 
 
 

@@ -15,7 +15,7 @@
 
 <?import com.stockmanager.view.forms.NumberTextField?>
 <VBox fx:controller="com.stockmanager.controller.forms.AddProductFormController"
-      prefHeight="577.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+      prefHeight="577.0" prefWidth="600.0" xmlns:fx="http://javafx.com/javafx/fxml">
     <padding>
         <Insets topRightBottomLeft="40"/>
     </padding>
@@ -25,7 +25,7 @@
                 <Font name="Century Gothic" size="17.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="categoryComboBox" prefHeight="25.0" prefWidth="164.0" editable="true"/>
+        <ComboBox fx:id="categoryComboBox" prefHeight="25.0" prefWidth="164.0" />
 
         <Label prefHeight="38.0" prefWidth="222.0" text="Nome do produto">
             <font>
@@ -50,7 +50,7 @@
                 <Font name="Century Gothic" size="17.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="pricingUnitComboBox" prefHeight="25.0" prefWidth="164.0" editable="true">
+        <ComboBox fx:id="pricingUnitComboBox" prefHeight="25.0" prefWidth="164.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="UN (Unidade)"/>
