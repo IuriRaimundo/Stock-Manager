@@ -26,7 +26,7 @@ public class RegisterBreakageProductFormController extends FormController implem
     @FXML private ComboBox<ProductBreakageReason> cmbReason;
 
     public RegisterBreakageProductFormController() {
-        super("Registar quebra de produto", "LotMovementScreen");
+        super("Registar Quebra de Produto", "LotMovementScreen");
     }
 
     @Override
