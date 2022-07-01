@@ -90,6 +90,7 @@ public class AddProductFormController extends FormController implements Initiali
         pricingUnitComboBox.setItems(observableProductPricingUnitList);
 
         pricingUnitComboBox.setCellFactory(new Callback<>() {
+
             @Override
             public ListCell<ProductPricingUnit> call(ListView<ProductPricingUnit> l) {
                 return new ListCell<>() {
@@ -106,7 +107,6 @@ public class AddProductFormController extends FormController implements Initiali
                 };
             }
         });
-
         pricingUnitComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(ProductPricingUnit productPricingUnit) {

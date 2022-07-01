@@ -1,5 +1,6 @@
 package com.stockmanager.controller.forms;
 
+import com.stockmanager.controller.screens.LotScreenController;
 import com.stockmanager.model.product.Category;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
@@ -8,6 +9,7 @@ import com.stockmanager.model.storage.Lot;
 import com.stockmanager.model.storage.ProductIssueRecord;
 import com.stockmanager.model.storage.StorageManager;
 import com.stockmanager.model.storage.StorageManagerUtils;
+import com.stockmanager.view.components.MainBorderPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -128,7 +130,12 @@ public class RegisterProductIssueFormController extends FormController implement
                 return StorageManagerUtils.getStoredLotByLotString(lotstring);
             }
         });
+        Object selection = MainBorderPane.controller.getTableRowSelection();
+        if (selection instanceof Lot selectedLot) {
+            cmbCategory.setValue(selectedLot.getProduct().getCategory());
+            cmbLot.setValue(selectedLot);
 
+        }
     }
 
     @Override

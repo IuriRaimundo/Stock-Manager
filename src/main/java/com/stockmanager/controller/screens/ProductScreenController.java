@@ -43,7 +43,6 @@ public class ProductScreenController implements Initializable {
     private TableColumn<Product, Integer> toProductUnit;
     @FXML
     private TableColumn<Product, String> toState;
-
     @FXML
     private TextField searchTextField;
 

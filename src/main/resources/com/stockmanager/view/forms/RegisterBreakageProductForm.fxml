@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="502.0" prefWidth="755.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.stockmanager.controller.forms.RegisterBreakageProductFormController">
+<VBox prefHeight="502.0" prefWidth="755.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmanager.controller.forms.RegisterBreakageProductFormController">
     <padding>
         <Insets topRightBottomLeft="40" />
     </padding>
@@ -26,7 +26,7 @@
                 <Insets bottom="5.0" top="10.0" />
             </VBox.margin>
         </Label>
-        <ComboBox fx:id="cmbCategory" editable="true" prefWidth="200.0">
+        <ComboBox fx:id="cmbCategory" prefWidth="200.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
@@ -42,7 +42,7 @@
                 <Insets />
             </opaqueInsets>
         </Label>
-        <ComboBox fx:id="cmbLot" editable="true" prefWidth="200.0">
+        <ComboBox fx:id="cmbLot" prefWidth="200.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
@@ -68,7 +68,7 @@
                 <Insets bottom="5.0" top="10.0" />
             </VBox.margin>
         </Label>
-        <ComboBox fx:id="cmbReason" editable="true" prefWidth="200.0">
+        <ComboBox fx:id="cmbReason" prefWidth="200.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>

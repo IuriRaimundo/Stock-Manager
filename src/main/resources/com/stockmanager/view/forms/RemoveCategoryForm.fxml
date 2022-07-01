@@ -20,7 +20,7 @@
             </font>
         </Label>
 
-        <ComboBox fx:id="cmbCategory" prefHeight="25.0" prefWidth="164.0" editable="true"/>
+        <ComboBox fx:id="cmbCategory" prefHeight="25.0" prefWidth="164.0"/>
 
         <HBox spacing="10" alignment="CENTER_RIGHT">
             <padding>

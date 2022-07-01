@@ -46,6 +46,30 @@ public class LotScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Row factory
+        lotTable.setRowFactory(tv -> {
+            TableRow<Lot> row = new TableRow<>();
+
+            // Adicionar listener a cliques
+            row.setOnMouseClicked(event -> {
+
+                // Atualizar seleção
+                Lot selectedLot = row.getItem();
+                MainBorderPane.controller.setTableRowSelection(selectedLot);
+                // Se foi dado um double-click abrir formulário de ajustar produto
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                    try {
+                        MainBorderPane.controller.openForm("RegisterProductIssueForm");
+                    } catch (Exception e) {
+                        MainBorderPane.controller.showError(e);
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
+
         toID.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getId()));
 
         // Formatar célula de produto neste formato: (PXX) XXXXX

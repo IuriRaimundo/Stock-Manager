@@ -22,18 +22,14 @@
             </font>
         </Label>
 
-        <ComboBox fx:id="cmbCategory" editable="true" prefHeight="25.0" prefWidth="164.0">
-
-        </ComboBox>
+        <ComboBox fx:id="cmbCategory" prefHeight="25.0" prefWidth="164.0"/>
 
         <Label prefHeight="38.0" prefWidth="222.0" text="Lote">
             <font>
                 <Font name="Century Gothic" size="17.0" />
             </font>
         </Label>
-        <ComboBox fx:id="cmbLot" editable="true" prefHeight="25.0" prefWidth="164.0">
-
-        </ComboBox>
+        <ComboBox fx:id="cmbLot" prefHeight="25.0" prefWidth="164.0"/>
 
         <Label prefHeight="38.0" prefWidth="222.0" text="Quantidade">
             <font>
