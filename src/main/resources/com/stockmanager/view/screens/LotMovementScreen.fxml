@@ -54,11 +54,12 @@
         <padding>
             <Insets topRightBottomLeft="20" />
         </padding>
-        <TableView fx:id="toMovementLot" styleClass="mainTable">
+        <TableView fx:id="movementRecordTableView" styleClass="mainTable">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
+                <TableColumn fx:id="toMovementId" text="Id" prefWidth="90" style="-fx-alignment: center" />
                 <TableColumn fx:id="toType" text="Tipo" prefWidth="90" style="-fx-alignment: center"/>
                 <TableColumn fx:id="toLot" text="Lote" prefWidth="90" style="-fx-alignment: center"/>
                 <TableColumn fx:id="toProduct" text="Produto" prefWidth="200"/>

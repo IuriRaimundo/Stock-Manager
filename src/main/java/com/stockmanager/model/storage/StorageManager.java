@@ -1,6 +1,7 @@
 package com.stockmanager.model.storage;
 
 import com.stockmanager.model.common.IdGenerator;
+import com.stockmanager.model.common.Manager;
 import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.storage.exceptions.*;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class StorageManager implements Serializable {
+public class StorageManager implements Serializable, Manager {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,17 +34,29 @@ public class StorageManager implements Serializable {
 
     public static ManagerDataLoader<StorageManager> dataLoader = new ManagerDataLoader<>(STORAGE_MANAGER_DATAFILE_NAME);
 
-    private static StorageManager instance;
+    private static StorageManager instance = new StorageManager();
 
-    static {
+    @Override
+    public void load() {
         try {
-            instance = dataLoader.initialize();
+            // Carregar manager do dataLoader
+            StorageManager storageManager = dataLoader.initialize();
 
-            if (instance == null) {
-                instance = new StorageManager();
+            // Se foi carregado com sucesso, sobreescrever instância
+            if (storageManager != null) {
+                instance = storageManager;
             }
 
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void save()  {
+        try {
+            dataLoader.persist(instance);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -109,8 +122,8 @@ public class StorageManager implements Serializable {
         StorageManagerUtils.validateLotEntry(lotEntryRecord, storedLots);
 
         //  Adicionar lote aos lotes ativos e registar movimento de entrada
-        this.storedLots.add(lotEntryRecord.getLot());
-        this.lotEntryRecords.add(lotEntryRecord);
+        this.storedLots.addFirst(lotEntryRecord.getLot());
+        this.lotEntryRecords.addFirst(lotEntryRecord);
     }
 
     /**
@@ -137,12 +150,12 @@ public class StorageManager implements Serializable {
         lot.subtractQuantity(movedAmount);
 
         // Registar movimento de saída de produtos
-        this.productIssueRecords.add(productIssueRecord);
+        this.productIssueRecords.addFirst(productIssueRecord);
 
         // Se a quantidade do lote for 0, tirar lote dos lotes ativos e adicionar ao histórico
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
-            lotHistory.add(lot);
+            lotHistory.addFirst(lot);
         }
     }
 
@@ -171,12 +184,12 @@ public class StorageManager implements Serializable {
         lot.subtractQuantity(movedAmount);
 
         // Registar movimento de quebra de produtos
-        this.productBreakageRecords.add(productBreakageRecord);
+        this.productBreakageRecords.addFirst(productBreakageRecord);
 
         // Se a quantidade do lote for 0, tirar lote dos lotes ativos e adicionar ao histórico
         if (lot.getQuantity() == 0) {
             storedLots.remove(lot);
-            lotHistory.add(lot);
+            lotHistory.addFirst(lot);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.stockmanager;
 
 import com.stockmanager.model.product.ProductManager;
+import com.stockmanager.model.storage.BreakExpiredLotsBatchJob;
 import com.stockmanager.model.storage.StorageManager;
 import com.stockmanager.view.components.MainBorderPane;
 import javafx.application.Application;
@@ -31,8 +32,11 @@ public class StockManager extends Application {
             System.out.println("Starting the application...");
 
             try {
-                StorageManager.dataLoader.initialize();
-                ProductManager.dataLoader.initialize();
+                StorageManager.getStorageManager().load();
+                ProductManager.getProductManager().load();
+
+                // Executar batch job
+                BreakExpiredLotsBatchJob.instance.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,8 +47,8 @@ public class StockManager extends Application {
         System.out.println("Closing the application...");
 
         try {
-            StorageManager.dataLoader.persist(StorageManager.getStorageManager());
-            ProductManager.dataLoader.persist(ProductManager.getProductManager());
+            StorageManager.getStorageManager().save();
+            ProductManager.getProductManager().save();
         } catch (Exception e) {
             e.printStackTrace();
         }

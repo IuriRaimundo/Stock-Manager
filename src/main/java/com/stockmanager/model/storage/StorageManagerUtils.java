@@ -32,9 +32,9 @@ abstract public class StorageManagerUtils {
         // Validar data de expiração
         Date expirationDate =  lot.getExpirationDate();
         // Se data de expiração for inferior à data atual, lançar exceção
-        if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
-            throw new InvalidLotExpirationDateException(expirationDate);
-        }
+//        if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
+//            throw new InvalidLotExpirationDateException(expirationDate);
+//        }
 
         // Validar unicidade do lote
         if (storedLots.contains(lot)) {

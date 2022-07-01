@@ -1,7 +1,5 @@
 package com.stockmanager.controller.screens;
-import com.stockmanager.model.product.Category;
 import com.stockmanager.model.product.Product;
-import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.storage.*;
 import com.stockmanager.view.components.MainBorderPane;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,19 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -29,7 +21,10 @@ import java.util.ResourceBundle;
 public class LotMovementScreenController implements Initializable {
 
     @FXML
-    private TableView<MovementRecord> toMovementLot;
+    private TableView<MovementRecord> movementRecordTableView;
+
+    @FXML
+    private TableColumn<MovementRecord, String> toMovementId;
     @FXML
     private TableColumn<MovementRecord, String> toType;
     @FXML
@@ -43,6 +38,8 @@ public class LotMovementScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        toMovementId.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getId()));
 
         toType.setCellValueFactory(p -> {
             MovementRecord movementRecord = p.getValue();
@@ -83,18 +80,16 @@ public class LotMovementScreenController implements Initializable {
         movementRecords.addAll(storageManager.getProductIssueRecords());
         movementRecords.addAll(storageManager.getProductBreakageRecords());
 
-        // Ordenar lista por data, por ordem crescente
-        movementRecords.sort(new Comparator<MovementRecord>() {
-            @Override
-            public int compare(MovementRecord o1, MovementRecord o2) {
-                return (int) (o1.getMovementDate().getCalendar().getTimeInMillis() - o2.getMovementDate().getCalendar().getTimeInMillis());
-            }
-        });
-
+        // Popular tabela
         ObservableList<MovementRecord> categoryList =
                 FXCollections.observableArrayList(movementRecords);
 
-        toMovementLot.setItems(categoryList);
+        movementRecordTableView.setItems(categoryList);
+
+        // Ordenar tabela por id de movimento
+        toMovementId.setSortType(TableColumn.SortType.DESCENDING);
+        movementRecordTableView.getSortOrder().add(toMovementId);
+        movementRecordTableView.sort();
     }
 
 

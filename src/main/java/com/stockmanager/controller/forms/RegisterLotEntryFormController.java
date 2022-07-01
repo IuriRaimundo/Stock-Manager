@@ -41,7 +41,7 @@ public class RegisterLotEntryFormController extends FormController implements In
                 cmbProduct.getValue(), date, spnQuantity.getValue()
         );
         LotEntryRecord lotEntryRecord = new LotEntryRecord(
-                StorageManager.getStorageManager().lotIdGenerator.generateId(), lot
+                StorageManager.getStorageManager().movementRecordIdGenerator.generateId(), lot
         );
 
         // Adicionar registo de entrada de lote ao manager.
