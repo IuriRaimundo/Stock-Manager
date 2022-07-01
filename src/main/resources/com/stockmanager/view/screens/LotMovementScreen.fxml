@@ -24,9 +24,9 @@
             <TextField fx:id="searchTextField"
                        GridPane.rowIndex="0" GridPane.columnIndex="0"
                        styleClass="searchBar"
-                       promptText="Pesquisar por id ou nome"
+                       promptText="Pesquisar por lote ou produto"
             />
-            <Button fx:id="searchButton"
+            <Button onAction="#searchButtonActionHandler"
                     GridPane.rowIndex="0" GridPane.columnIndex="1"
                     defaultButton="true"
                     styleClass="darkButton" text="Pesquisar"/>
