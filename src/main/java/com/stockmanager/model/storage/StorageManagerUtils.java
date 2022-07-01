@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 abstract public class StorageManagerUtils {
 
@@ -105,5 +106,28 @@ abstract public class StorageManagerUtils {
         }
 
         return getStoredLotById(id.toString());
+    }
+
+    /**
+     * Método para caluclar o valor de uma determinada quantidade de produtos de um lote.
+     * @param lot Lot dos produtos
+     * @param productAmount Quantidade de produtos a ser calculado
+     * @return Valor da quantia de produtos
+     */
+    public static double calculateLotProductsValue(Lot lot, int productAmount) {
+
+        double value = lot.getProduct().getPrice() * productAmount;
+
+        // Aplicar 20% de desconto se o tempo de validade for menos de 1 mês
+        long nowMs = Calendar.getInstance().getTimeInMillis();
+        long expDateMs = lot.getExpirationDate().calendar.getTimeInMillis();
+
+        long daysBetweenExpDateAndNow = TimeUnit.MILLISECONDS.toDays(expDateMs - nowMs);
+
+        if (daysBetweenExpDateAndNow < 30) {
+            value *= 0.8;
+        }
+
+        return value;
     }
 }

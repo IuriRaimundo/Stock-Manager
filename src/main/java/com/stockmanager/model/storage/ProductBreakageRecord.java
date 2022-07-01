@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class ProductBreakageRecord extends MovementRecord implements Serializable {
 
@@ -30,7 +32,7 @@ public class ProductBreakageRecord extends MovementRecord implements Serializabl
         super(id, brokeProductLot, movedAmount);
         this.reason = reason;
         this.observation = observation;
-        this.lossValue = calculateLoss();
+        this.lossValue = StorageManagerUtils.calculateLotProductsValue(lot, movedAmount);
     }
 
     /**
@@ -52,13 +54,5 @@ public class ProductBreakageRecord extends MovementRecord implements Serializabl
      */
     public double getLossValue() {
         return lossValue;
-    }
-
-    /**
-     * Método para calcular o valor perdido pela quebra
-     * @return
-     */
-    private double calculateLoss() {
-        return this.lot.getProduct().getPrice() * this.movedAmount;
     }
 }

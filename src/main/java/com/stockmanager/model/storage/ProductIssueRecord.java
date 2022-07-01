@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class ProductIssueRecord extends MovementRecord implements Serializable {
 
@@ -22,7 +24,7 @@ public class ProductIssueRecord extends MovementRecord implements Serializable {
                               int movedAmount)
     {
         super(id, productIssuedLot, movedAmount);
-        this.gainValue = calculateGain();
+        this.gainValue = StorageManagerUtils.calculateLotProductsValue(lot, movedAmount);
     }
 
     /**
@@ -30,13 +32,5 @@ public class ProductIssueRecord extends MovementRecord implements Serializable {
      */
     public double getGainValue() {
         return gainValue;
-    }
-
-    /**
-     * Método para calcular o valor ganho pela saída de produtos
-     * @return
-     */
-    private double calculateGain() {
-        return this.lot.getProduct().getPrice() * this.movedAmount;
     }
 }
