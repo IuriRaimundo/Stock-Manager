@@ -63,7 +63,6 @@
     -fx-background-color: -primaryColor;
 }
 .combo-box .list-cell:selected{
-    -fx-background-color: -pr;
     -fx-text-fill: Black;
 }
 
