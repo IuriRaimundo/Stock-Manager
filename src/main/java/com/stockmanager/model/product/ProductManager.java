@@ -124,7 +124,7 @@ public class ProductManager implements Serializable {
     public void addProduct(@NotNull Product product) throws DuplicateKeyException {
 
         // Validar produto
-        validateProduct(product);
+        validateProduct(product, ProductValidationMode.NEW);
 
         // Registar produto
         HashMapUtils.hashMapUniqueInsertion(
@@ -151,7 +151,7 @@ public class ProductManager implements Serializable {
         }
 
         // Validar produto
-        validateProduct(product);
+        validateProduct(product, ProductValidationMode.UPDATE);
 
         // Atualizar produto
         productToUpdate.setPrice(product.getPrice());
@@ -188,10 +188,10 @@ public class ProductManager implements Serializable {
      * @throws InvalidProductNameException Se o nome de produto for inválido.
      * @throws InvalidProductBrandException Se a marca de produto for inválida.
      */
-    public void validateProduct(Product product) {
+    public void validateProduct(Product product, ProductValidationMode mode) {
 
-        // Verificar se o produto já se encontra registado
-        if (products.get(product.getId()) != null) {
+        // Verificar se o produto já se encontra registado para validação de novo produto
+        if (mode == ProductValidationMode.NEW && products.get(product.getId()) != null) {
             throw new DuplicateKeyException();
         }
 

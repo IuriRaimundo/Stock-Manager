@@ -74,7 +74,7 @@ public class Product implements Serializable {
     /**
      * @param name Novo nome do produto
      */
-    void setName(@NotNull String name) {
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
@@ -95,7 +95,7 @@ public class Product implements Serializable {
     /**
      * @param price Novo preço
      */
-    void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -116,7 +116,7 @@ public class Product implements Serializable {
     /**
      * @param active Novo estado do produto, verdadeiro = ativo, falso = desativado
      */
-    void setActive(boolean active) {
+    public void setActive(boolean active) {
         isActive = active;
     }
 
