@@ -73,7 +73,7 @@ public class HomeScreenController implements Initializable {
         double lossValue = 0;
 
         for (ProductBreakageRecord r : StorageManager.getStorageManager().getProductBreakageRecords()) {
-            lossValue += r.getLossValue();
+            lossValue += r.getMovedAmount();
         }
 
         return lossValue;
