@@ -1,5 +1,6 @@
 package com.stockmanager.controller.screens;
 
+import com.stockmanager.controller.forms.AdjustProductFormController;
 import com.stockmanager.model.common.IdGenerator;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
@@ -14,10 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
@@ -79,6 +77,26 @@ public class ProductScreenController implements Initializable {
         productList = ProductManager.getProductManager().getProducts().values().stream().toList();
         productObservableList = FXCollections.observableArrayList(productList);
         productTableView.setItems(productObservableList);
+
+
+        //Double click table view
+        AdjustProductFormController adjustProductFormController = null;
+        productTableView.setRowFactory(tv -> {
+            TableRow<Product> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Product rowData = row.getItem();
+                    try {
+                        MainBorderPane.controller.openForm("AdjustProductForm");
+                        //todo - PARA IDENTIFICAR OS ITEMS DA LISTA, USA-SE O ROWDATA
+                    } catch (Exception e) {
+                        MainBorderPane.controller.showError(e);
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row ;
+        });
     }
 
 
@@ -100,26 +118,12 @@ public class ProductScreenController implements Initializable {
     }
 
     public void adjustProductButton(ActionEvent event){
-        Node source = (Node) event.getSource();
-
-        Scene scene = source.getScene();
-
-        Label topBarLabel = (Label) scene.lookup("#topBarLabel");
-
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/prototipo/prototipomsi/screens/adjustProductForm.fxml"));
-            mainBorderPane.setCenter(fxmlLoader.load());
-            if (topBarLabel != null) {
-                topBarLabel.setText("Ajustar Produto");
-            }
-
+            MainBorderPane.controller.openForm("AdjustProductForm");
         } catch (Exception e) {
+            MainBorderPane.controller.showError(e);
             e.printStackTrace();
         }
-
     }
 
     @FXML
