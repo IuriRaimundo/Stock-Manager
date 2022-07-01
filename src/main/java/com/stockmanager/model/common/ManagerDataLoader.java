@@ -5,7 +5,7 @@ import java.io.*;
 public class ManagerDataLoader<ManagerClass> {
 
     private final String USER_HOME = System.getProperty("user.home");
-    private String APP_HOME = USER_HOME + "\\StockManager";
+    private final String APP_HOME = USER_HOME + "\\StockManager";
     private final String DATAFILE_PATH;
     private final String DATAFILE_NAME;
 
@@ -18,8 +18,6 @@ public class ManagerDataLoader<ManagerClass> {
     /**
      * Método para repor a instância atual de um manager pela instância armazenada
      * no datafile associado.
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     public ManagerClass initialize() throws IOException, ClassNotFoundException {
         ManagerClass instance;
@@ -29,6 +27,8 @@ public class ManagerDataLoader<ManagerClass> {
         try {
             // Abrir datafile
             File df = new File(DATAFILE_PATH);
+
+            System.out.println();
 
             // Se o datafile não existir não vale a pena ler os dados, então devolver.
             if (!df.exists()) {
@@ -42,7 +42,7 @@ public class ManagerDataLoader<ManagerClass> {
             fis = new FileInputStream(df);
             in = new ObjectInputStream(fis);
             instance = (ManagerClass) in.readObject();
-            System.out.println(instance.getClass().getSimpleName() + " data loaded.");
+            System.out.println(instance.getClass().getSimpleName() + " data loaded.\n");
 
         } finally {
             // Fechar stream
@@ -56,7 +56,6 @@ public class ManagerDataLoader<ManagerClass> {
 
     /**
      * Método para armazenar a instância do manager no datafile.
-     * @throws IOException
      */
     public void persist(ManagerClass instance) throws IOException {
         FileOutputStream fos;
@@ -65,6 +64,8 @@ public class ManagerDataLoader<ManagerClass> {
         try {
             // Abrir diretório da aplicação e criar caso não exista
             File appDir = new File(APP_HOME);
+
+            System.out.println();
 
             if (!appDir.exists()) {
                 appDir.mkdir();
@@ -90,7 +91,7 @@ public class ManagerDataLoader<ManagerClass> {
             fos = new FileOutputStream(df);
             out = new ObjectOutputStream(fos);
             out.writeObject(instance);
-            System.out.println(instance.getClass().getSimpleName() + " data saved.");
+            System.out.println(instance.getClass().getSimpleName() + " data saved.\n");
 
         } finally {
             // Fechar stream

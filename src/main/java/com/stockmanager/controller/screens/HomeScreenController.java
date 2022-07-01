@@ -1,15 +1,14 @@
 package com.stockmanager.controller.screens;
 
-import com.stockmanager.controller.components.CardController;
 import com.stockmanager.model.storage.*;
 import com.stockmanager.view.components.Card;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -17,7 +16,7 @@ public class HomeScreenController implements Initializable {
     @FXML
     private Card totalGainCard;
     @FXML
-    private Card totalBreakageProductCard;
+    private Card totalProductBreakageLossCard;
     @FXML
     private Card totalLotCard;
     @FXML
@@ -30,12 +29,10 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
         double totalProductIssueGain = calculateTotalProductIssueGain();
-        totalGainCard.getController().updateBodyLabel(String.valueOf(totalProductIssueGain) + "€");
-
-        double totalBreakageProduct = calculateTotalBreakageProduct();
-        totalBreakageProductCard.getController().updateBodyLabel(String.valueOf(totalBreakageProduct) + "€");
+        totalGainCard.getController().updateBodyLabel(decimalFormat.format(totalProductIssueGain) + "€");
 
         int totalLot = (int) calculateTotalLot();
         totalLotCard.getController().updateBodyLabel(String.valueOf(totalLot));
@@ -50,6 +47,8 @@ public class HomeScreenController implements Initializable {
 
         totalExitProductCard.getController().updateTitleLabel("Saída de produtos " + formatDate.format(LocalDateTime.now()));
 
+        double totalProductBreakageLoss = calculateTotalProductBreakageLoss();
+        totalProductBreakageLossCard.getController().updateBodyLabel(decimalFormat.format(totalProductBreakageLoss) + "€");
 
     }
 
@@ -70,7 +69,7 @@ public class HomeScreenController implements Initializable {
      * Método para calcular o total da soma da quebra de produtos
      * @return Valor total da quebra de produtos
      */
-    private double calculateTotalBreakageProduct() {
+    private double calculateTotalProductBreakageLoss() {
         double lossValue = 0;
 
         for (ProductBreakageRecord r : StorageManager.getStorageManager().getProductBreakageRecords()) {

@@ -2,21 +2,19 @@ package com.stockmanager.model.common;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 
-public abstract class Manager implements Serializable {
+public interface Manager  {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    /**
+     * Método para carregar um data manager dos datafiles
+     */
+    void load();
 
-    public final String DATAFILE_NAME;
-
-    public Manager(@NotNull String DATAFILE_NAME) {
-        this.DATAFILE_NAME = DATAFILE_NAME;
-
-    }
-
-    public static void setInstance(Manager instance) {}
-
+    /**
+     * Método para guardar a instância do manager
+     */
+    void save();
 }

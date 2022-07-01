@@ -1,8 +1,10 @@
 package com.stockmanager.model.product;
 
 import com.stockmanager.model.common.IdGenerator;
+import com.stockmanager.model.common.Manager;
 import com.stockmanager.model.common.ManagerDataLoader;
 import com.stockmanager.model.product.exceptions.ProductNotFoundException;
+import com.stockmanager.model.storage.StorageManager;
 import org.jetbrains.annotations.NotNull;
 
 import com.stockmanager.model.product.exceptions.*;
@@ -14,7 +16,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class ProductManager implements Serializable {
+public class ProductManager implements Serializable, Manager {
 
     @Serial
     private static final long serialVersionUID = 2L;
@@ -42,6 +44,31 @@ public class ProductManager implements Serializable {
             }
 
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void load() {
+        try {
+            // Carregar manager do dataLoader
+            ProductManager productManager = dataLoader.initialize();
+
+            // Se foi carregado com sucesso, sobre escrever instância
+            if (productManager != null) {
+                instance = productManager;
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void save()  {
+        try {
+            dataLoader.persist(instance);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
