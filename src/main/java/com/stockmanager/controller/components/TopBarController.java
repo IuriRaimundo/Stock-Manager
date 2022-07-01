@@ -15,4 +15,8 @@ public class TopBarController {
         topBarLabel.setText(text);
     }
 
+    public String getTopBarLabelText() {
+        return topBarLabel.getText();
+    }
+
 }

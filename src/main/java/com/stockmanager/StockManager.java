@@ -12,11 +12,13 @@ import java.io.IOException;
 
 public class StockManager extends Application {
 
+    public static String APPLICATION_TITLE = "Gestor De Stock";
+
     @Override
     public void start(Stage stage) throws IOException {
         MainBorderPane mainBorderPane = new MainBorderPane();
         Scene scene = new Scene(mainBorderPane, 320, 240);
-        stage.setTitle("Gestor De Stock");
+        stage.setTitle(APPLICATION_TITLE);
         stage.setScene(scene);
         stage.setMinWidth(1400);
         stage.setMinHeight(720);

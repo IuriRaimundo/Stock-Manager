@@ -3,6 +3,7 @@ package com.stockmanager.controller.forms;
 import com.stockmanager.model.product.Product;
 import com.stockmanager.model.product.ProductManager;
 import com.stockmanager.model.product.ProductManagerUtils;
+import com.stockmanager.view.components.MainBorderPane;
 import com.stockmanager.view.forms.exceptions.InvalidNumericInputException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ public class AdjustProductFormController extends FormController implements Initi
     public ComboBox<Product> cmbProduct;
     public TextField txtName;
     public TextField txtPrice;
-    public CheckBox checkBox;
+    public CheckBox isActiveCheckbox;
 
     public AdjustProductFormController() {
         super("Ajustar Produto", "ProductScreen");
@@ -36,7 +37,7 @@ public class AdjustProductFormController extends FormController implements Initi
         Product product = cmbProduct.getValue();
         product.setName(txtName.getText());
         product.setPrice(productPrice);
-        product.setActive(checkBox.isSelected());
+        product.setActive(isActiveCheckbox.isSelected());
 
         ProductManager.getProductManager().updateProduct(product);
     }
@@ -44,7 +45,7 @@ public class AdjustProductFormController extends FormController implements Initi
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Inicializar Componentes
-        setFields(Arrays.asList(cmbProduct, txtName, txtPrice, checkBox));
+        setFields(Arrays.asList(cmbProduct, txtName, txtPrice, isActiveCheckbox));
         // Popular combo box de produtos
         LinkedList<Product> prodList = new LinkedList<>(ProductManager.getProductManager().getProducts().values());
         ObservableList<Product> observableprodList = FXCollections.observableArrayList(prodList);
@@ -86,6 +87,16 @@ public class AdjustProductFormController extends FormController implements Initi
                 return ProductManagerUtils.getProductByProductString(productString);
             }
         });
+
+        // Se existir um produto selecionado popular campos
+        Object selection = MainBorderPane.controller.getTableRowSelection();
+
+        if (selection instanceof Product selectedProduct) {
+            cmbProduct.setValue(selectedProduct);
+            txtName.setText(selectedProduct.getName());
+            txtPrice.setText(String.valueOf(selectedProduct.getPrice()));
+            isActiveCheckbox.setSelected(selectedProduct.getIsActive());
+        }
 
     }
 }

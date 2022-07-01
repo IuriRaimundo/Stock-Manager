@@ -79,22 +79,28 @@ public class ProductScreenController implements Initializable {
         productTableView.setItems(productObservableList);
 
 
-        //Double click table view
-        AdjustProductFormController adjustProductFormController = null;
+        // Row factory
         productTableView.setRowFactory(tv -> {
             TableRow<Product> row = new TableRow<>();
+
+            // Adicionar listener a cliques
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Product rowData = row.getItem();
+
+                // Atualizar seleção
+                Product selectedProduct = row.getItem();
+                MainBorderPane.controller.setTableRowSelection(selectedProduct);
+
+                // Se foi dado um double-click abrir formulário de ajustar produto
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     try {
                         MainBorderPane.controller.openForm("AdjustProductForm");
-                        //todo - PARA IDENTIFICAR OS ITEMS DA LISTA, USA-SE O ROWDATA
                     } catch (Exception e) {
                         MainBorderPane.controller.showError(e);
                         e.printStackTrace();
                     }
                 }
             });
+
             return row ;
         });
     }

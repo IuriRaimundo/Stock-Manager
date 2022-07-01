@@ -44,7 +44,7 @@
                 <Font name="Century Gothic" size="17.0" />
             </font>
         </Label>
-        <CheckBox fx:id="checkBox" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="16.0" prefWidth="82.0" text="Ativo">
+        <CheckBox fx:id="isActiveCheckbox" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="16.0" prefWidth="82.0" text="Ativo">
             <font>
                 <Font name="Century Gothic" size="11.0" />
             </font>

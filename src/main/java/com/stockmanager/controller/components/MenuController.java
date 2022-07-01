@@ -1,5 +1,6 @@
 package com.stockmanager.controller.components;
 
+import com.stockmanager.view.components.MainBorderPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,19 +16,7 @@ public class MenuController {
      * @param screenName Nome do ecrã a ser apresentado
      */
     private void redirect(String screenName) {
-
-        // Obter referencia para o mainBorderPane
-        Scene scene = menu.getScene();
-        BorderPane mainBorderPane = (BorderPane) scene.lookup("#mainBorderPane");
-
-        try {
-            // Alterar center do mainBorderPane para o ecrã passado por parametro
-            String screenPath = "/com/stockmanager/view/screens/" + screenName + ".fxml";
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(screenPath));
-            mainBorderPane.setCenter(fxmlLoader.load());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        MainBorderPane.controller.changeScreen(screenName);
     }
 
     @FXML
