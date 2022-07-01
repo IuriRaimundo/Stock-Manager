@@ -18,12 +18,13 @@ abstract public class StorageManagerUtils {
 
     /**
      * Método para validar a entrada de um lote
+     *
      * @param lotEntryRecord Registo de entrada do lote
-     * @param storedLots Lots armazenados para validar
-     * @throws InvalidLotExpirationDateException Se a data de expiração do lote for inferior à data atual
-     * @throws DuplicateLotEntryException Se o lote já estiver guardado nos storedLots
-     * @throws ProductNotFoundException Se o produto do lote não estiver registado no storage manager
-     * @throws ProductNotActiveException Se o produto do lote não estiver ativo
+     * @param storedLots     Lots armazenados para validar
+     * @throws InvalidLotExpirationDateException     Se a data de expiração do lote for inferior à data atual
+     * @throws DuplicateLotEntryException            Se o lote já estiver guardado nos storedLots
+     * @throws ProductNotFoundException              Se o produto do lote não estiver registado no storage manager
+     * @throws ProductNotActiveException             Se o produto do lote não estiver ativo
      * @throws InvalidMovementMovedQuantityException Se a quantidade movida no registo de entrada de lote for <= 0
      */
     static void validateLotEntry(@NotNull LotEntryRecord lotEntryRecord, @NotNull LinkedList<Lot> storedLots) {
@@ -31,11 +32,11 @@ abstract public class StorageManagerUtils {
         Lot lot = lotEntryRecord.getLot();
 
         // Validar data de expiração
-        Date expirationDate =  lot.getExpirationDate();
+        Date expirationDate = lot.getExpirationDate();
         // Se data de expiração for inferior à data atual, lançar exceção
-//        if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
-//            throw new InvalidLotExpirationDateException(expirationDate);
-//        }
+        if (expirationDate.calendar.compareTo(Calendar.getInstance()) < 0) {
+            throw new InvalidLotExpirationDateException(expirationDate);
+        }
 
         // Validar unicidade do lote
         if (storedLots.contains(lot)) {
@@ -59,11 +60,12 @@ abstract public class StorageManagerUtils {
 
     /**
      * Método para validar a quantidade de produtos movida em um registo de movimento.
+     *
      * @param movedQuantity Quantidade de produtos movida
      * @throws InvalidMovementMovedQuantityException Se a quantidade for menor ou igual a 0.
      */
     static void validateMovementMovedQuantity(int movedQuantity) {
-        if (movedQuantity <= 0 ) {
+        if (movedQuantity <= 0) {
             throw new InvalidMovementMovedQuantityException(movedQuantity);
         }
     }
@@ -71,6 +73,7 @@ abstract public class StorageManagerUtils {
     /**
      * Método para obter um lote armazenado através do id.
      * Tempo linear O(n).
+     *
      * @param id Id a procurar
      * @return Stored lot ou null se não for encontrado
      */
@@ -87,6 +90,7 @@ abstract public class StorageManagerUtils {
     /**
      * Método para procurar um lote armazenado através do resultado do toString() de um lote.
      * Utiliza a função de procura getStoredLotById, logo executa em tempo linear O(n).
+     *
      * @param lotString String a ser procurada
      * @return Lote armazenado ou null se não encontrar
      */
@@ -110,7 +114,8 @@ abstract public class StorageManagerUtils {
 
     /**
      * Método para caluclar o valor de uma determinada quantidade de produtos de um lote.
-     * @param lot Lot dos produtos
+     *
+     * @param lot           Lot dos produtos
      * @param productAmount Quantidade de produtos a ser calculado
      * @return Valor da quantia de produtos
      */

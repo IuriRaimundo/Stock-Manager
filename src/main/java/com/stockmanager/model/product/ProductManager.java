@@ -33,20 +33,7 @@ public class ProductManager implements Serializable, Manager {
 
     public static ManagerDataLoader<ProductManager> dataLoader = new ManagerDataLoader<>(PRODUCT_MANAGER_DATAFILE);
 
-    private static ProductManager instance;
-
-    static {
-        try {
-            instance = dataLoader.initialize();
-
-            if (instance == null) {
-                instance = new ProductManager();
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    private static ProductManager instance = new ProductManager();
 
     @Override
     public void load() {

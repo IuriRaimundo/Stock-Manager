@@ -2,7 +2,7 @@ package com.stockmanager.model.common;
 
 import java.io.*;
 
-public class ManagerDataLoader<ManagerClass> {
+public class ManagerDataLoader<ManagerClass extends Manager> {
 
     private final String USER_HOME = System.getProperty("user.home");
     private final String APP_HOME = USER_HOME + "\\StockManager";

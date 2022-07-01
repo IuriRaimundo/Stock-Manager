@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class StockManager extends Application {
 
-    public static String APPLICATION_TITLE = "Gestor De Stock";
+    public static String APPLICATION_TITLE = "Stock Manager";
 
     @Override
     public void start(Stage stage) throws IOException {

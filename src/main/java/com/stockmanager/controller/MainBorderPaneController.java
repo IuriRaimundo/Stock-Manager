@@ -26,7 +26,7 @@ public class MainBorderPaneController {
     public void showError(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
-            alert.setHeaderText("Ocorreu um erro na melhor aplicação.");
+            alert.setHeaderText("Ocorreu um erro!");
             alert.setContentText(e.getMessage());
             Optional<ButtonType> result = alert.showAndWait();
     }
